@@ -1,4 +1,4 @@
-package com.example.gtrainer.Activity;
+package com.example.gtrainer.ui.SideMenuActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.gtrainer.Activity.Apply_For_Trainer_2;
 import com.example.gtrainer.Api.ApiClientInterface;
 import com.example.gtrainer.R;
 import com.example.gtrainer.model.User;

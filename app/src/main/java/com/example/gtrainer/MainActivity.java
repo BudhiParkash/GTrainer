@@ -19,11 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.example.gtrainer.Activity.All_List_Trainer;
-import com.example.gtrainer.Activity.Apply_For_Trainer;
 import com.example.gtrainer.Adapter.AddvertismentAdapter;
 import com.example.gtrainer.Adapter.PopularAdapter;
 import com.example.gtrainer.model.Ads_Pojo;
 import com.example.gtrainer.model.PopularPojo;
+import com.example.gtrainer.ui.SideMenuActivity.Apply_For_Trainer;
+import com.example.gtrainer.ui.SideMenuActivity.BookingActivity;
+import com.example.gtrainer.ui.SideMenuActivity.HelpActivity;
+import com.example.gtrainer.ui.SideMenuActivity.PrivacyAndPolicyActivity;
+import com.example.gtrainer.ui.SideMenuActivity.TermsAndConditionActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
@@ -65,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this , LinearLayoutManager.HORIZONTAL , false);
+    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+    private RelativeLayout mBookingLayout;
+    private RelativeLayout mHelpLayout;
+    private RelativeLayout mPrivacyLayout;
+    private RelativeLayout mTermConditionL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         mViewAllTrainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this , All_List_Trainer.class);
+                Intent intent = new Intent(MainActivity.this, All_List_Trainer.class);
                 startActivity(intent);
             }
         });
@@ -87,7 +95,43 @@ public class MainActivity extends AppCompatActivity {
         mApplyforTrainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this , Apply_For_Trainer.class);
+                Intent intent = new Intent(MainActivity.this, Apply_For_Trainer.class);
+                startActivity(intent);
+                mDrawerLayout.closeDrawers();
+            }
+        });
+
+        mBookingLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, BookingActivity.class);
+                startActivity(intent);
+                mDrawerLayout.closeDrawers();
+            }
+        });
+
+        mHelpLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+                startActivity(intent);
+                mDrawerLayout.closeDrawers();
+            }
+        });
+
+        mTermConditionL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TermsAndConditionActivity.class);
+                startActivity(intent);
+                mDrawerLayout.closeDrawers();
+            }
+        });
+
+        mPrivacyLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PrivacyAndPolicyActivity.class);
                 startActivity(intent);
                 mDrawerLayout.closeDrawers();
             }
@@ -120,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         DiscreteScrollView scrollView = findViewById(R.id.picker);
-        scrollView.setAdapter(new PopularAdapter(popularPojoList , MainActivity.this));
+        scrollView.setAdapter(new PopularAdapter(popularPojoList, MainActivity.this));
 
         scrollView.setItemTransformer(new ScaleTransformer.Builder()
                 .setMinScale(0.7f)
@@ -156,9 +200,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         if (linearLayoutManager.findLastCompletelyVisibleItemPosition() < (mAds_Adapter.getItemCount() - 1)) {
                                             linearLayoutManager.smoothScrollToPosition(mRecycleAdds, new RecyclerView.State(), linearLayoutManager.findLastCompletelyVisibleItemPosition() + 1);
-                                        }
-
-                                        else if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == (mAds_Adapter.getItemCount() - 1)) {
+                                        } else if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == (mAds_Adapter.getItemCount() - 1)) {
                                             linearLayoutManager.smoothScrollToPosition(mRecycleAdds, new RecyclerView.State(), 0);
                                         }
                                     }
@@ -171,11 +213,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
 
-                    Toast.makeText(MainActivity.this, "Failed to load" +e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Failed to load" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (Exception e) {
-            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -190,5 +232,9 @@ public class MainActivity extends AppCompatActivity {
         mApplyforTrainer = findViewById(R.id.applyfortrainer_Layout);
 
 
+        mBookingLayout = findViewById(R.id.booking_layout);
+        mHelpLayout = findViewById(R.id.help_layout);
+        mPrivacyLayout = findViewById(R.id.privacy_layout);
+        mTermConditionL = findViewById(R.id.term_conditionL);
     }
 }

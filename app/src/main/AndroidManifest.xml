@@ -14,8 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GTrainer"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.Apply_For_Trainer_2"></activity>
-        <activity android:name=".Activity.Apply_For_Trainer" />
+        <activity android:name=".ui.SideMenuActivity.BookingActivity"></activity>
+        <activity android:name=".ui.SideMenuActivity.TermsAndConditionActivity" />
+        <activity android:name=".ui.SideMenuActivity.PrivacyAndPolicyActivity" />
+        <activity android:name=".ui.SideMenuActivity.HelpActivity" />
+        <activity android:name=".Activity.Apply_For_Trainer_2" />
+        <activity android:name=".ui.SideMenuActivity.Apply_For_Trainer" />
         <activity android:name=".Activity.TrainerProfileActivity" />
         <activity android:name=".Activity.All_List_Trainer" />
         <activity android:name=".OnBoardingScreen.ProfileInfo" />

@@ -83,7 +83,38 @@
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
                     android:layout_alignParentStart="true"
-                    android:text="Apply for trainer"
+                    android:text="Apply For Trainer"
+                    android:textColor="@color/textcolor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="12dp"
+                    android:drawableLeft="@drawable/ic_navigate_next_24"
+                    app:drawableStartCompat="@drawable/ic_navigate_next_24" />
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height=".5dp"
+                android:background="@color/viewline"/>
+            <RelativeLayout
+                android:id="@+id/booking_layout"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_alignParentStart="true"
+                    android:text="Booking"
                     android:textColor="@color/textcolor"
                     android:layout_alignParentLeft="true" />
 
@@ -125,44 +156,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:layout_marginEnd="12dp"
                     android:drawableStart="@drawable/ic_navigate_next_24"
-                    android:drawableLeft="@drawable/ic_navigate_next_24"
-                    android:layout_marginRight="12dp" />
-
-
-
-            </RelativeLayout>
-
-            <View
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height=".5dp"
-                android:background="@color/viewline"/>
-            <RelativeLayout
-                android:id="@+id/appearance_layout"
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17sp"
-                    android:layout_alignParentStart="true"
-                    android:text="Appearance"
-                    android:textColor="@color/textcolor"
-                    android:layout_alignParentLeft="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="12dp"
-                    android:drawableStart="@drawable/ic_navigate_next_24"
-                    android:drawableLeft="@drawable/ic_navigate_next_24"
                     android:layout_marginRight="12dp" />
 
 
@@ -185,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
                     android:layout_alignParentStart="true"
-                    android:text="Privacy and Security"
+                    android:text="Privacy and Policy"
                     android:textColor="@color/textcolor"
                     android:layout_alignParentLeft="true" />
 
@@ -209,7 +204,7 @@
                 android:background="@color/viewline"/>
 
             <RelativeLayout
-                android:id="@+id/invite_friends"
+                android:id="@+id/term_conditionL"
                 android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -218,8 +213,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
+                    android:textColor="@color/textcolor"
                     android:layout_alignParentStart="true"
-                    android:text="Invite Friends"
+                    android:text="Terms And Condition"
                     android:layout_alignParentLeft="true" />
 
                 <TextView
