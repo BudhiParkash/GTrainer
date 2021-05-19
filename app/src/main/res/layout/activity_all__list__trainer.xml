@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.All_List_Trainer">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/bck_btn_Convestion"
+                android:layout_width="16pt"
+                android:layout_height="18pt"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_arrow_back"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"
+                />
+
+
+
+            <TextView
+                android:id="@+id/toolbar_User_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="All Trainers"
+                android:textSize="20sp"
+                android:textColor="@color/textcolor"
+                android:layout_marginStart="12dp"/>
+
+        </LinearLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Popular"
+             android:textSize="20sp"
+             android:textColor="@color/textcolor"
+             android:layout_marginStart="16dp"
+             android:layout_marginBottom="8dp"
+             android:layout_marginTop="8dp"/>
+
+
+
+        <com.yarolegovich.discretescrollview.DiscreteScrollView
+            android:id="@+id/picker2"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dsv_orientation="horizontal"
+
+            />
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textcolor"
+                    android:text="All Trainers"
+                    android:textSize="22sp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"/>
+
+
+
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:drawableTop="@drawable/ic_star"
+                        android:text="4.5/5.0"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"/>
+
+
+
+
+
+                <LinearLayout
+                    android:layout_marginStart="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="2dp"
+                        app:cardCornerRadius="8dp"
+                        android:layout_width="120dp"
+                        android:layout_height="160dp">
+
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/johncina"/>
+
+
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+
+                    <LinearLayout
+                        android:layout_margin="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="John Cena"
+                            android:textSize="20sp"
+                            android:textColor="@color/textcolor"/>
+
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="A good trainer with lot of expirence."
+                            android:textSize="16sp"
+                            android:textColor="@color/textcolor"/>
+
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rs. 999/M"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorPrimary"/>
+
+
+
+
+                    </LinearLayout>
+
+
+
+
+
+
+
+                </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:drawableTop="@drawable/ic_star"
+                        android:text="4.5/5.0"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"/>
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_marginStart="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="2dp"
+                            app:cardCornerRadius="8dp"
+                            android:layout_width="120dp"
+                            android:layout_height="160dp">
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/johncina"/>
+
+
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+
+                        <LinearLayout
+                            android:layout_margin="16dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="John Cena"
+                                android:textSize="20sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="A good trainer with lot of expirence."
+                                android:textSize="16sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rs. 999/M"
+                                android:textSize="16sp"
+                                android:textColor="@color/colorPrimary"/>
+
+
+
+
+                        </LinearLayout>
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:drawableTop="@drawable/ic_star"
+                        android:text="4.5/5.0"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"/>
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_marginStart="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="2dp"
+                            app:cardCornerRadius="8dp"
+                            android:layout_width="120dp"
+                            android:layout_height="160dp">
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/johncina"/>
+
+
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+
+                        <LinearLayout
+                            android:layout_margin="16dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="John Cena"
+                                android:textSize="20sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="A good trainer with lot of expirence."
+                                android:textSize="16sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rs. 999/M"
+                                android:textSize="16sp"
+                                android:textColor="@color/colorPrimary"/>
+
+
+
+
+                        </LinearLayout>
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:drawableTop="@drawable/ic_star"
+                        android:text="4.5/5.0"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"/>
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_marginStart="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="2dp"
+                            app:cardCornerRadius="8dp"
+                            android:layout_width="120dp"
+                            android:layout_height="160dp">
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/johncina"/>
+
+
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+
+                        <LinearLayout
+                            android:layout_margin="16dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="John Cena"
+                                android:textSize="20sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="A good trainer with lot of expirence."
+                                android:textSize="16sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rs. 999/M"
+                                android:textSize="16sp"
+                                android:textColor="@color/colorPrimary"/>
+
+
+
+
+                        </LinearLayout>
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:drawableTop="@drawable/ic_star"
+                        android:text="4.5/5.0"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"/>
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_marginStart="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="2dp"
+                            app:cardCornerRadius="8dp"
+                            android:layout_width="120dp"
+                            android:layout_height="160dp">
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/johncina"/>
+
+
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+
+                        <LinearLayout
+                            android:layout_margin="16dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="John Cena"
+                                android:textSize="20sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="A good trainer with lot of expirence."
+                                android:textSize="16sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rs. 999/M"
+                                android:textSize="16sp"
+                                android:textColor="@color/colorPrimary"/>
+
+
+
+
+                        </LinearLayout>
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:drawableTop="@drawable/ic_star"
+                        android:text="4.5/5.0"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"/>
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_marginStart="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="2dp"
+                            app:cardCornerRadius="8dp"
+                            android:layout_width="120dp"
+                            android:layout_height="160dp">
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/johncina"/>
+
+
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+
+                        <LinearLayout
+                            android:layout_margin="16dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="John Cena"
+                                android:textSize="20sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="A good trainer with lot of expirence."
+                                android:textSize="16sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rs. 999/M"
+                                android:textSize="16sp"
+                                android:textColor="@color/colorPrimary"/>
+
+
+
+
+                        </LinearLayout>
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorScreen3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/secondFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gym Trainer 2"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:layout_margin="30dp"
+
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="30dp"
+        android:orientation="vertical">
+        <!--   <com.airbnb.lottie.LottieAnimationView
+               android:layout_width="250dp"
+               android:layout_height="250dp"
+               app:lottie_autoPlay="true"
+               app:lottie_loop="true"
+               app:lottie_rawRes="@raw/lablottie"/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book"
+            android:textColor="@color/white"
+            android:textSize="27sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="33"
+            android:textColor="@color/white"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do your lab tests from \nhome at very affordable \nprice from best laboratories"  android:textColor="@color/white"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_GoToLogin"
+        android:layout_margin="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+   <!--   <ImageView
+          android:layout_width="50dp"
+          android:layout_height="20dp"
+          android:src="@drawable/dot2"
+          android:layout_alignParentBottom="true"
+          android:layout_margin="30dp"/>-->
+
+
+</RelativeLayout>

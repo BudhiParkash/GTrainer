@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "508442463973",
+    "project_id": "gtrainer",
+    "storage_bucket": "gtrainer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508442463973:android:c778ea4bb46ddc07470e0c",
+        "android_client_info": {
+          "package_name": "com.example.gtrainer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508442463973-f0v8923p81fd9pgvp6i0pb26a3p9l9h4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3i44RJRozDew2EzSxhhO_sMapCdsAVhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508442463973-f0v8923p81fd9pgvp6i0pb26a3p9l9h4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

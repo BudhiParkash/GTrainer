@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/otpProgressBar"
+        android:visibility="gone"
+        android:indeterminateTint="@color/white"
+        android:layout_centerInParent="true"
+        />
+
+    <TextView
+        android:layout_alignParentStart="true"
+        android:id="@+id/txtBackFromOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_arrow_back"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verification"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/textcolor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:id="@+id/txtVerificationName"/>
+
+    <TextView
+        android:layout_alignParentEnd="true"
+        android:id="@+id/txtVerify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verify"
+        android:textSize="16sp"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:textAlignment="center"
+        android:text="Enter four digit code we sent on your phone number +91 0000000000"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:textColor="@color/textcolor"
+        android:id="@+id/txtHeadingOtp"
+        android:layout_below="@id/txtVerificationName"/>
+
+
+    <in.aabhasjindal.otptextview.OtpTextView
+        android:id="@+id/etxtOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textcolor"
+        app:bar_enabled="true"
+        app:bar_height="2dp"
+        app:length="6"
+        app:bar_active_color="@color/lighttextcolor"
+        android:inputType="number"
+        android:layout_marginBottom="30dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/txtHeadingOtp"
+        app:otp_text_size="20dp"/>
+
+    <TextView
+        android:id="@+id/txtResendOtp"
+        android:layout_below="@id/etxtOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resend"
+        android:layout_centerInParent="true"
+        android:textSize="16sp"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/otpcountdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/textcolor"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/txtResendOtp"/>
+
+
+</RelativeLayout>

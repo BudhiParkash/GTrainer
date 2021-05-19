@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_marginTop="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/accountImage"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_margin="4dp"
+                android:src="@drawable/profile"
+                app:civ_border_color="@color/viewline"
+                app:civ_border_width="2dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_margin="6dp"
+                android:id="@+id/accountUserName"
+                android:textColor="@color/textcolor"
+                android:text="Shivam Sharma"/>
+
+            <TextView
+                android:id="@+id/accountNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:textColor="@color/textcolor"
+                android:text="870 XXX XXXX"/>
+
+            <TextView
+                android:id="@+id/userview_Account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_margin="4dp"
+                android:textColor="@color/colorPrimary"
+                android:text="View Account"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp">
+
+            <View
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height=".5dp"
+                android:background="@color/viewline"/>
+            <RelativeLayout
+                android:id="@+id/applyfortrainer_Layout"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_alignParentStart="true"
+                    android:text="Apply for trainer"
+                    android:textColor="@color/textcolor"
+                    android:layout_alignParentLeft="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="12dp"
+                    android:drawableStart="@drawable/ic_navigate_next_24"
+                    android:drawableLeft="@drawable/ic_navigate_next_24"
+                    android:layout_marginRight="12dp" />
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height=".5dp"
+                android:background="@color/viewline"/>
+            <RelativeLayout
+                android:id="@+id/help_layout"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_alignParentStart="true"
+                    android:text="Help"
+                    android:textColor="@color/textcolor"
+                    android:layout_alignParentLeft="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="12dp"
+                    android:drawableStart="@drawable/ic_navigate_next_24"
+                    android:drawableLeft="@drawable/ic_navigate_next_24"
+                    android:layout_marginRight="12dp" />
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height=".5dp"
+                android:background="@color/viewline"/>
+            <RelativeLayout
+                android:id="@+id/appearance_layout"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_alignParentStart="true"
+                    android:text="Appearance"
+                    android:textColor="@color/textcolor"
+                    android:layout_alignParentLeft="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="12dp"
+                    android:drawableStart="@drawable/ic_navigate_next_24"
+                    android:drawableLeft="@drawable/ic_navigate_next_24"
+                    android:layout_marginRight="12dp" />
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height=".5dp"
+                android:background="@color/viewline"/>
+            <RelativeLayout
+                android:id="@+id/privacy_layout"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_alignParentStart="true"
+                    android:text="Privacy and Security"
+                    android:textColor="@color/textcolor"
+                    android:layout_alignParentLeft="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/textcolor"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="12dp"
+                    android:drawableStart="@drawable/ic_navigate_next_24" />
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height=".5dp"
+                android:background="@color/viewline"/>
+
+            <RelativeLayout
+                android:id="@+id/invite_friends"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_alignParentStart="true"
+                    android:text="Invite Friends"
+                    android:layout_alignParentLeft="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="12dp"
+                    android:drawableStart="@drawable/ic_navigate_next_24"
+                    android:drawableLeft="@drawable/ic_navigate_next_24"
+                    android:layout_marginRight="12dp" />
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height=".5dp"
+                android:background="@color/viewline"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Phone Number"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:textColor="@color/textcolor"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/txtNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:text="Next"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimary"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Your Phone Number"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/textcolor"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="G Trainer will send an SMS message to\nverify your phone number"
+            android:layout_marginTop="30dp"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textColor="#AAA5A5"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="16dp">
+
+
+      <!--  <TextView
+            android:id="@+id/txtcountrycode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16sp"/>-->
+
+
+        <TextView
+            android:id="@+id/txtcountrycode"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="+91"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:textColor="@color/textcolor"
+            />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:background="#D3CECE"/>
+
+        <EditText
+            android:id="@+id/eTxtphoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint=" Phone Number"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textColor="@color/textcolor"
+            android:textColorHint="@color/lighttextcolor"
+            />
+    </LinearLayout>
+
+    <ProgressBar
+        android:indeterminateTint="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/phoneProgressbar"
+        android:visibility="gone"/>
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView_skip"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Skip" />-->
+
+
+
+    <!--    <Button-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:id="@+id/sahil"-->
+    <!--        android:text="Sahil Home"/>-->
+
+</LinearLayout>
