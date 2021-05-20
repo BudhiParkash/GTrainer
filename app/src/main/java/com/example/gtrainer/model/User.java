@@ -29,7 +29,7 @@ public class User {
     private Long phoneNum;
     @SerializedName("certificates")
     @Expose
-    private List<Object> certificates = null;
+    private List<CertificatePhotoPojo> certificates = null;
     @SerializedName("trainerPic")
     @Expose
     private List<Object> trainerPic = null;
@@ -218,11 +218,11 @@ public class User {
         this.phoneNum = phoneNum;
     }
 
-    public List<Object> getCertificates() {
+    public List<CertificatePhotoPojo> getCertificates() {
         return certificates;
     }
 
-    public void setCertificates(List<Object> certificates) {
+    public void setCertificates(List<CertificatePhotoPojo> certificates) {
         this.certificates = certificates;
     }
 

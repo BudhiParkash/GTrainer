@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImageUpload">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            >
+
+            <ImageButton
+                android:layout_alignParentStart="true"
+                android:id="@+id/bck_btn_certificate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_arrow_back"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"
+                android:layout_centerVertical="true"
+                />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Add Certificate"
+                android:layout_centerInParent="true"
+                android:textSize="20sp"
+                android:textColor="@color/textcolor"
+                android:layout_marginStart="12dp"/>
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/outline"
+            android:src="@drawable/ic_baseline_add_photo_alternate_24"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="25dp"
+            android:layout_gravity="center"
+            android:id="@+id/certificate_Pic"/>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_height="wrap_content"
+            android:text="Select Pic"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:id="@+id/bpicselector"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_height="wrap_content"
+            android:text="Upload Pic"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:id="@+id/bupload"/>
+
+
+    </LinearLayout>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit222"
+        style="@style/SpinKitView.Large.Wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/colorPrimary"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

@@ -1,18 +1,31 @@
 package com.example.gtrainer.Api;
 
+import com.example.gtrainer.model.CertificatePhotoPojo;
+import com.example.gtrainer.model.PayPojo;
+import com.example.gtrainer.model.TrainerPicPojo;
 import com.example.gtrainer.model.User;
 import com.example.gtrainer.model.UserPojo;
+import com.google.gson.JsonObject;
 
+import java.util.List;
+
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public class ApiClientInterface {
 
+    //http://192.168.1.7 brondband
+    //http://192.168.155.72 PocoX2
     private static final String url = "http://192.168.43.72:3000/";
 
     public static GTrainerApiService gTrainerApiService = null;
@@ -43,7 +56,19 @@ public class ApiClientInterface {
         Call<User>  applyfortrainer(@Header("Authorization") String header , @Body User userData);
 
 
+        @Multipart
+        @POST("/v1/users/addcerti")
+        Call<ResponseBody> uploadCertificate(@Header("Authorization") String Header, @Part MultipartBody.Part slipImage);
 
+        //Payment
+        @POST("/pay")
+        Call<List<PayPojo>> getOrderId(@Header("Authorization") String Header, @Body JsonObject jo);
+
+        @GET("/v1/users/getcerti")
+        Call<List<CertificatePhotoPojo>> getCerti_Pic(@Header("Authorization") String Header);
+
+        @GET("/v1/users/trainerpic")
+        Call<List<TrainerPicPojo>> getTrainer_Pic(@Header("Authorization") String Header);
 
     }
 }
