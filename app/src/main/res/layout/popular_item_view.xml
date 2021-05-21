@@ -25,6 +25,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/top_trainer_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -49,6 +50,7 @@
                 android:text="lkjk" />
 
             <TextView
+                android:id="@+id/top_trainer_rating"
                 android:layout_width="26dp"
                 android:layout_height="36dp"
                 android:layout_alignParentStart="true"
@@ -63,6 +65,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/top_trainer_price"
                 android:layout_width="81dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -99,7 +102,7 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/top_tranier_pic"
         android:layout_width="117dp"
         android:layout_height="154dp"
         android:elevation="10dp"

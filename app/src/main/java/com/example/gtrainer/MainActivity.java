@@ -1,6 +1,7 @@
 package com.example.gtrainer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,9 +21,11 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.example.gtrainer.Activity.All_List_Trainer;
 import com.example.gtrainer.Adapter.AddvertismentAdapter;
-import com.example.gtrainer.Adapter.PopularAdapter;
+import com.example.gtrainer.Adapter.Top_Trainer_Adapter;
+import com.example.gtrainer.Api.ApiClientInterface;
 import com.example.gtrainer.model.Ads_Pojo;
 import com.example.gtrainer.model.PopularPojo;
+import com.example.gtrainer.model.User;
 import com.example.gtrainer.ui.SideMenuActivity.Apply_For_Trainer;
 import com.example.gtrainer.ui.SideMenuActivity.BookingActivity;
 import com.example.gtrainer.ui.SideMenuActivity.HelpActivity;
@@ -42,6 +45,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator;
 
 public class MainActivity extends AppCompatActivity {
@@ -59,12 +65,16 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mDrawerLinerLayout;
 
     private TextView mMenuHome;
+    DiscreteScrollView popularRecycle;
 
     private MaterialCardView mViewAllTrainer;
     final int time = 4000;
 
     private ProgressBar mAddProgress;
     private RelativeLayout mApplyforTrainer;
+
+
+    private List<User> userList = new ArrayList<>();
 
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -75,14 +85,29 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout mPrivacyLayout;
     private RelativeLayout mTermConditionL;
 
+    SharedPreferences prefs;
+    String  tokken;
+    private Top_Trainer_Adapter top_trainer_adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        prefs = getSharedPreferences("ProfileData", MODE_PRIVATE);
+        tokken = prefs.getString("tokken","no tokkens");
+        mAddProgress.setVisibility(View.VISIBLE);
+
+        mRecycleAdds.setHasFixedSize(true);
+        mRecycleAdds.setLayoutManager(linearLayoutManager);
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(mRecycleAdds);
+
         Call_Ads_Data();
 
-        mAddProgress.setVisibility(View.VISIBLE);
+
+
+        getTopTrainers();
 
         mViewAllTrainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,10 +162,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mRecycleAdds.setHasFixedSize(true);
-        mRecycleAdds.setLayoutManager(linearLayoutManager);
-        SnapHelper snapHelper = new PagerSnapHelper();
-        snapHelper.attachToRecyclerView(mRecycleAdds);
+
 
         mMenuHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,19 +178,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        for (int i = 0; i < 10; i++) {
-            PopularPojo list = new PopularPojo();
-
-            popularPojoList.add(list);
-        }
 
 
-        DiscreteScrollView scrollView = findViewById(R.id.picker);
-        scrollView.setAdapter(new PopularAdapter(popularPojoList, MainActivity.this));
 
-        scrollView.setItemTransformer(new ScaleTransformer.Builder()
-                .setMinScale(0.7f)
-                .build());
+
+
+
+
+    }
+
+    private void getTopTrainers() {
+        Call<List<User>> call  = ApiClientInterface.getTrainerApiService().getTopTrainer(tokken);
+
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if(response.code() == 200){
+                    userList = response.body();
+                    assert userList != null;
+                    Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    if(userList.size() == 0){
+
+                    }
+
+                    top_trainer_adapter  = new Top_Trainer_Adapter(userList , MainActivity.this);
+                    popularRecycle.setAdapter(top_trainer_adapter);
+                    top_trainer_adapter.notifyDataSetChanged();
+
+
+                    popularRecycle.setItemTransformer(new ScaleTransformer.Builder()
+                            .setMinScale(0.7f)
+                            .build());
+                }
+                else {
+                    Toast.makeText(MainActivity.this, ""+response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 
@@ -230,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
         mViewAllTrainer = findViewById(R.id.btnViewAllTrainer);
         mAddProgress = findViewById(R.id.ad_progressBar);
         mApplyforTrainer = findViewById(R.id.applyfortrainer_Layout);
+        popularRecycle  = findViewById(R.id.toptrainerRecycle);
 
 
         mBookingLayout = findViewById(R.id.booking_layout);

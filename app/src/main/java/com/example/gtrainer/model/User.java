@@ -32,10 +32,10 @@ public class User {
     private List<CertificatePhotoPojo> certificates = null;
     @SerializedName("trainerPic")
     @Expose
-    private List<Object> trainerPic = null;
+    private List<TrainerPicPojo> trainerPic = null;
     @SerializedName("ratings")
     @Expose
-    private List<Object> ratings = null;
+    private List<RatingPojo> ratings = null;
     @SerializedName("createdAt")
     @Expose
     private String createdAt;
@@ -75,6 +75,11 @@ public class User {
     private String experiance;
 
 
+    @SerializedName("price")
+    @Expose
+    private Integer price;
+
+
     public User(Boolean trainerAvailable, String user_name, String email, String city, String aboutUser, String address, String gender, String language, String experiance) {
         this.trainerAvailable = trainerAvailable;
         this.user_name = user_name;
@@ -85,6 +90,14 @@ public class User {
         this.gender = gender;
         this.language = language;
         this.experiance = experiance;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public String getAboutUser() {
@@ -226,19 +239,19 @@ public class User {
         this.certificates = certificates;
     }
 
-    public List<Object> getTrainerPic() {
+    public List<TrainerPicPojo> getTrainerPic() {
         return trainerPic;
     }
 
-    public void setTrainerPic(List<Object> trainerPic) {
+    public void setTrainerPic(List<TrainerPicPojo> trainerPic) {
         this.trainerPic = trainerPic;
     }
 
-    public List<Object> getRatings() {
+    public List<RatingPojo> getRatings() {
         return ratings;
     }
 
-    public void setRatings(List<Object> ratings) {
+    public void setRatings(List<RatingPojo> ratings) {
         this.ratings = ratings;
     }
 

@@ -25,8 +25,9 @@ import retrofit2.http.Part;
 public class ApiClientInterface {
 
     //http://192.168.1.7 brondband
-    //http://192.168.155.72 PocoX2
-    private static final String url = "http://192.168.43.72:3000/";
+    //http://192.168.73.72 PocoX2
+    //http://192.168.43.72:3000/ shivaa
+    private static final String url = "http://192.168.73.72:3000/";
 
     public static GTrainerApiService gTrainerApiService = null;
 
@@ -69,6 +70,14 @@ public class ApiClientInterface {
 
         @GET("/v1/users/trainerpic")
         Call<List<TrainerPicPojo>> getTrainer_Pic(@Header("Authorization") String Header);
+
+
+        @GET("/v1/toptrainers")
+        Call<List<User>>  getTopTrainer(@Header("Authorization") String Header);
+
+        @GET("/v1/trainers/get")
+        Call<List<User>>  getAllTrainer(@Header("Authorization") String Header);
+
 
     }
 }
