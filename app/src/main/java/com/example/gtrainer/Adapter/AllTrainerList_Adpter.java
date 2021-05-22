@@ -21,9 +21,9 @@ import java.util.List;
 
 public class AllTrainerList_Adpter extends RecyclerView.Adapter<AllTrainerList_Adpter.AllListViewHolder> {
 
-    UrlLink urls = new UrlLink();
-    private final String url = urls.url;
-    private List<User> data;
+    static UrlLink urls = new UrlLink();
+    private final static String url = urls.url;
+    private static List<User> data;
     static Context context;
 
 
@@ -45,19 +45,25 @@ public class AllTrainerList_Adpter extends RecyclerView.Adapter<AllTrainerList_A
 
         User userData = data.get(position);
 
-        for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
-            String picurl = url+ userData.getTrainerPic().get(i).getPic();
-            Picasso.get().load(picurl).into(holder.mTrainerImage);
-        }
+        try {
+            for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
+                String picurl = url+ userData.getTrainerPic().get(i).getPic();
+                Picasso.get().load(picurl).into(holder.mTrainerImage);
+            }
 
-        for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
-            String rating = userData.getRatings().get(i).getRating();
-            holder.mTrainerRating.setText(rating);
-        }
+            for (int i= 0 ; i< userData.getRatings().size(); i++ ){
+                String rating = userData.getRatings().get(i).getRating();
+                holder.mTrainerRating.setText(rating);
+            }
 
-        holder.mAboutTrainer.setText(userData.getAboutUser());
-        holder.mTrainerName.setText(userData.getUser_name());
-        holder.mTrainerPrice.setText(userData.getPrice()+" only/-");
+            holder.mAboutTrainer.setText(userData.getAboutUser());
+            holder.mTrainerName.setText(userData.getUser_name());
+            holder.mTrainerPrice.setText(userData.getPrice()+" only/-");
+
+        }
+        catch (Exception e){
+
+        }
 
 
 
@@ -66,10 +72,6 @@ public class AllTrainerList_Adpter extends RecyclerView.Adapter<AllTrainerList_A
     @Override
     public int getItemCount() {
         return data.size();
-    }
-
-    private void initView() {
-
     }
 
     static class AllListViewHolder extends RecyclerView.ViewHolder {
@@ -91,8 +93,50 @@ public class AllTrainerList_Adpter extends RecyclerView.Adapter<AllTrainerList_A
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    String picurl ="";
+                    String rating ="";
+                    String trainerName="";
+                    String aboutTrainer="";
+                    int trainerPrice=0;
+                    String expirence="";
+                    String trainerId ="";
+
+                    User userData = data.get(getAdapterPosition());
+
+                    try {
+                        for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
+                            picurl = url+ userData.getTrainerPic().get(i).getPic();
+
+                        }
+
+                        for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
+                            rating = userData.getRatings().get(i).getRating();
+                        }
+                        trainerName = userData.getUser_name();
+                        aboutTrainer = userData.getAboutUser();
+                        trainerPrice = userData.getPrice();
+                        expirence = userData.getExperiance();
+                        trainerId = userData.getId();
+                    }
+                    catch (Exception e){
+
+                    }
+
+
+
+
+
                     Intent intent = new Intent(context, TrainerProfileActivity.class);
+                    intent.putExtra("trainerName", trainerName);
+                    intent.putExtra("aboutTrainer" , aboutTrainer);
+                    intent.putExtra("trainerPrice" , trainerPrice);
+                    intent.putExtra("trainerRating", rating);
+                    intent.putExtra("picUrl",picurl);
+                    intent.putExtra("expirence" , expirence);
+                    intent.putExtra("tranierId" , trainerId);
                     context.startActivity(intent);
+
 
                 }
             });

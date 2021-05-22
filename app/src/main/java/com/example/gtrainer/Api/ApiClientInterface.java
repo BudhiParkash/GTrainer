@@ -1,7 +1,9 @@
 package com.example.gtrainer.Api;
 
+import com.example.gtrainer.model.BookingPojo;
 import com.example.gtrainer.model.CertificatePhotoPojo;
 import com.example.gtrainer.model.PayPojo;
+import com.example.gtrainer.model.TrainerListPojo;
 import com.example.gtrainer.model.TrainerPicPojo;
 import com.example.gtrainer.model.User;
 import com.example.gtrainer.model.UserPojo;
@@ -21,6 +23,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public class ApiClientInterface {
 
@@ -61,6 +64,10 @@ public class ApiClientInterface {
         @POST("/v1/users/addcerti")
         Call<ResponseBody> uploadCertificate(@Header("Authorization") String Header, @Part MultipartBody.Part slipImage);
 
+        @Multipart
+        @POST("/v1/users/ownpic")
+        Call<ResponseBody> uploadTrainerImage(@Header("Authorization") String Header, @Part MultipartBody.Part slipImage);
+
         //Payment
         @POST("/pay")
         Call<List<PayPojo>> getOrderId(@Header("Authorization") String Header, @Body JsonObject jo);
@@ -76,7 +83,20 @@ public class ApiClientInterface {
         Call<List<User>>  getTopTrainer(@Header("Authorization") String Header);
 
         @GET("/v1/trainers/get")
-        Call<List<User>>  getAllTrainer(@Header("Authorization") String Header);
+        Call<TrainerListPojo>  getAllTrainer(@Header("Authorization") String Header  , @Query("page") int page , @Query("limit") int limit );
+
+        @POST("/v1/booking")
+        Call<BookingPojo>  postBooking(@Header("Authorization") String Header , @Body BookingPojo bookingPojo);
+
+        @GET("/v1/bookings")
+        Call<List<BookingPojo>>  getBookings(@Header("Authorization") String Header );
+
+        @GET("/v1/tranier/get")
+        Call<User>  getBookedTrainer(@Header("Authorization")String Header, @Query("tranierid") String tranierid);
+
+
+
+
 
 
     }

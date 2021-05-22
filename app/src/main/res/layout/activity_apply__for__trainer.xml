@@ -59,7 +59,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_margin="10dp"
-            android:id="@+id/trainerName"
+            android:id="@+id/etxtrainerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -85,7 +85,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_margin="10dp"
-            android:id="@+id/trainerEmail"
+            android:id="@+id/etxtrainerEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -110,7 +110,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_margin="10dp"
-            android:id="@+id/trainerCity"
+            android:id="@+id/etxtrainerCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -229,6 +229,13 @@
 </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:id="@+id/detils1Progressbar"/>
 
 
 

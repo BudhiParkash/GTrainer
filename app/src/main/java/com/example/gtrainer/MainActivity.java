@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Ads_Pojo> ads_pojoList = new ArrayList<>();
 
-    private List<PopularPojo> popularPojoList = new ArrayList<>();
     private DrawerLayout mDrawerLayout;
     private LinearLayout mDrawerLinerLayout;
 
@@ -104,9 +103,6 @@ public class MainActivity extends AppCompatActivity {
         snapHelper.attachToRecyclerView(mRecycleAdds);
 
         Call_Ads_Data();
-
-
-
         getTopTrainers();
 
         mViewAllTrainer.setOnClickListener(new View.OnClickListener() {
@@ -189,14 +185,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void getTopTrainers() {
         Call<List<User>> call  = ApiClientInterface.getTrainerApiService().getTopTrainer(tokken);
-
+        mAddProgress.setVisibility(View.VISIBLE);
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if(response.code() == 200){
+                    mAddProgress.setVisibility(View.GONE);
                     userList = response.body();
                     assert userList != null;
-                    Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
                     if(userList.size() == 0){
 
                     }
@@ -211,12 +207,14 @@ public class MainActivity extends AppCompatActivity {
                             .build());
                 }
                 else {
+                    mAddProgress.setVisibility(View.GONE);
                     Toast.makeText(MainActivity.this, ""+response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
+                mAddProgress.setVisibility(View.GONE);
                 Toast.makeText(MainActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -264,11 +262,12 @@ public class MainActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-
+                    mAddProgress.setVisibility(View.GONE);
                     Toast.makeText(MainActivity.this, "Failed to load" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (Exception e) {
+            mAddProgress.setVisibility(View.GONE);
             Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }

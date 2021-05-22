@@ -47,6 +47,7 @@ public class ProfileInfo extends AppCompatActivity {
     String onlyNumber;
 
     String tokken;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,9 +163,11 @@ public class ProfileInfo extends AppCompatActivity {
 
                     assert userData != null;
                     tokken = userData.getToken();
+                    userID = userData.getUser().getId();
                     mEtxtName.setText(userData.getUser().getUser_name());
                     mEtxtEmail.setText(userData.getUser().getEmail());
                     editor.putString("tokken",tokken);
+                    editor.putString("userId" , userID);
                     editor.apply();
                     Toast.makeText(ProfileInfo.this, "Success", Toast.LENGTH_SHORT).show();
                 }

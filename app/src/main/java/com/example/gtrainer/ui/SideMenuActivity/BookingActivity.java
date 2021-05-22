@@ -1,6 +1,8 @@
 package com.example.gtrainer.ui.SideMenuActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -10,9 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.gtrainer.Activity.All_List_Trainer;
+import com.example.gtrainer.Adapter.AllTrainerList_Adpter;
+import com.example.gtrainer.Adapter.BookingAdapter;
 import com.example.gtrainer.Api.ApiClientInterface;
 import com.example.gtrainer.R;
+import com.example.gtrainer.model.BookingPojo;
 import com.example.gtrainer.model.PayPojo;
+import com.example.gtrainer.model.User;
 import com.google.gson.JsonObject;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
@@ -26,136 +33,104 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BookingActivity extends AppCompatActivity implements PaymentResultListener {
+public class BookingActivity extends AppCompatActivity  {
 
-    Button mBtnPAy;
 
-    private int price = 1;
+
     SharedPreferences preferences;
-    List<PayPojo> pp = new ArrayList<>();
+
     String tokken;
 
-    String key,orderId;
-    int finalPays;
-    private static final String TAG = "Find";
+    RecyclerView mBookingRecycle;
+    BookingAdapter mBookingAdapter;
+    List<BookingPojo> bookinglist = new ArrayList<>();
+
+    String tranierid;
+
+    List<User> bookedtainer =  new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
-        mBtnPAy = findViewById(R.id.paymoney);
 
         preferences = getSharedPreferences("ProfileData", MODE_PRIVATE);
+        tokken = preferences.getString("tokken", "");
+        getBooking();
 
-       tokken = preferences.getString("tokken", "");
+        mBookingRecycle = findViewById(R.id.bookingRecycle);
+        mBookingRecycle.setHasFixedSize(true);
+        mBookingRecycle.setLayoutManager(new LinearLayoutManager(BookingActivity.this, LinearLayoutManager.VERTICAL,false));
 
 
-        mBtnPAy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                payOnline(price);
-            }
-        });
+
+
     }
 
-    private void payOnline(int rate) {
-
-        rate = rate*100;
-        JsonObject amout = new JsonObject();
-        amout.addProperty("amount", rate);
-        Call<List<PayPojo>> call = ApiClientInterface.getTrainerApiService().getOrderId(tokken,amout);
-
-        call.enqueue(new Callback<List<PayPojo>>() {
+    private void getBookedTrainer(String tranierid) {
+        Call<User> call = ApiClientInterface.getTrainerApiService().getBookedTrainer(tokken , tranierid);
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<List<PayPojo>> call, Response<List<PayPojo>> response) {
-                if(response.code() == 201){
-                    pp = response.body();
-                    assert pp != null;
-                    key = pp.get(1).getKeyId();
-                    orderId = pp.get(0).getOrder().getId();
-                    finalPays = pp.get(0).getOrder().getAmountDue();
-                    startPayment();
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.code() == 200){
+                    Toast.makeText(BookingActivity.this, "get Booked Trainer", Toast.LENGTH_SHORT).show();
+                    User user = response.body();
 
-                }else {
-                    Toast.makeText(BookingActivity.this, "Please Check Details Again" + response.code(), Toast.LENGTH_SHORT).show();
+                    bookedtainer.add(user);
+
+                    mBookingAdapter  = new BookingAdapter(bookedtainer , BookingActivity.this);
+                    mBookingRecycle.setAdapter(mBookingAdapter);
+                    mBookingAdapter.notifyDataSetChanged();
+
+
+
                 }
-
+                else {
+                    Toast.makeText(BookingActivity.this, ""+response.code(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<PayPojo>> call, Throwable t) {
-                Toast.makeText(BookingActivity.this, "Please Check your internet", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(BookingActivity.this, "try after sometimes", Toast.LENGTH_SHORT).show();
+
             }
         });
-
-
     }
 
-    private void startPayment() {
-        /**
-         * Instantiate Checkout
-         */
+    private void getBooking() {
+        Call<List<BookingPojo>> call = ApiClientInterface.getTrainerApiService().getBookings(tokken);
+        call.enqueue(new Callback<List<BookingPojo>>() {
+            @Override
+            public void onResponse(Call<List<BookingPojo>> call, Response<List<BookingPojo>> response) {
+                if(response.code() == 200){
+                    bookinglist = response.body();
+                    assert bookinglist != null;
+                    Toast.makeText(BookingActivity.this, "size" + bookinglist.size(), Toast.LENGTH_SHORT).show();
+                    for (int i = 0; i < bookinglist.size(); i++){
+                        tranierid = bookinglist.get(i).getTrainerID();
+                        Toast.makeText(BookingActivity.this, ""+tranierid, Toast.LENGTH_SHORT).show();
+                        getBookedTrainer(tranierid);
+                    }
 
 
-        Checkout checkout = new Checkout();
-        checkout.setKeyID(key);
-        /**
-         * Set your logo here
-         */
-        checkout.setImage(R.drawable.rzp_logo);
-
-        /**
-         * Reference to current activity
-         */
-        final Activity activity = this;
-
-        /**
-         * Pass your payment options to the Razorpay Checkout as a JSONObject
-         */
-        try {
-            JSONObject options = new JSONObject();
-
-            /**
-             * Merchant Name
-             * eg: ACME Corp || HasGeek etc.
-             */
-            options.put("name", "Charak");
-
-            /**
-             * Description can be anything
-             * eg: Reference No. #123123 - This order number is passed by you for your internal reference. This is not the `razorpay_order_id`.
-             *     Invoice Payment
-             *     etc.
-             */
-            options.put("description", "Receipt for User");
-            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
-            options.put("order_id", orderId);
-            options.put("currency", "INR");
 
 
-            /**
-             * Amount is always passed in currency subunits
-             * Eg: "500" = INR 5.00
-             */
-            String finalPay = String.valueOf(finalPays);
-            options.put("amount", finalPay);
+                }
+                else {
 
-            checkout.open(activity, options);
-        } catch(Exception e) {
-            Toast.makeText(activity, "Try Again Later!", Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "Error in starting Razorpay Checkout", e);
-        }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<BookingPojo>> call, Throwable t) {
+
+            }
+        });
     }
 
-    @Override
-    public void onPaymentSuccess(String s) {
-        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
 
-    }
 
-    @Override
-    public void onPaymentError(int i, String s) {
 
-    }
 }

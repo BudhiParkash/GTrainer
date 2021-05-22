@@ -1,21 +1,23 @@
 package com.example.gtrainer.ui.SideMenuActivity;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,11 +30,8 @@ import com.example.gtrainer.R;
 import com.example.gtrainer.model.CertificatePhotoPojo;
 import com.example.gtrainer.model.TrainerPicPojo;
 import com.example.gtrainer.model.User;
-import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.github.dhaval2404.imagepicker.ImagePickerActivity;
+import com.google.android.material.textfield.TextInputLayout;
 
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,10 +55,26 @@ public class Apply_For_Trainer extends AppCompatActivity {
 
 
     RecyclerView mTrainer_Pic_Recycle;
-    private  List<TrainerPicPojo> trainerPicPojoList;
+    private List<TrainerPicPojo> trainerPicPojoList;
     Trainer_Pic_Adapter mTrainerPic_Adapter;
 
     String token;
+    private ImageButton mBckBtnApply;
+    private TextInputLayout mEtxtrainerName;
+    private TextInputLayout mEtxtrainerEmail;
+    private TextInputLayout mEtxtrainerCity;
+    private RadioGroup mRadioGrp;
+    private RadioButton mRadioM;
+    private RadioButton mRadioF;
+    private Button mApplybtn;
+
+    private String trainerName;
+    private String trainerEmail;
+    private String trainerCity;
+
+    String gender = "Male";
+    private ProgressBar mDetails_1_Progressbar;
+
 
 
     @Override
@@ -67,14 +82,15 @@ public class Apply_For_Trainer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apply__for__trainer);
         initView();
+        mDetails_1_Progressbar.setVisibility(View.VISIBLE);
 
         certi_picList = new ArrayList<>();
         mCerti_Recycle.setHasFixedSize(true);
-        mCerti_Recycle.setLayoutManager(new LinearLayoutManager(Apply_For_Trainer.this, LinearLayoutManager.HORIZONTAL,false));
+        mCerti_Recycle.setLayoutManager(new LinearLayoutManager(Apply_For_Trainer.this, LinearLayoutManager.HORIZONTAL, false));
 
         certi_picList = new ArrayList<>();
         mTrainer_Pic_Recycle.setHasFixedSize(true);
-        mTrainer_Pic_Recycle.setLayoutManager(new LinearLayoutManager(Apply_For_Trainer.this, LinearLayoutManager.HORIZONTAL,false));
+        mTrainer_Pic_Recycle.setLayoutManager(new LinearLayoutManager(Apply_For_Trainer.this, LinearLayoutManager.HORIZONTAL, false));
 
 
         mApply = findViewById(R.id.applybtn);
@@ -83,10 +99,9 @@ public class Apply_For_Trainer extends AppCompatActivity {
 
         token = preferences.getString("tokken", "");
 
-       // getSlipPic();
+        // getSlipPic();
 
-      //  getTrainerPic();
-
+        //  getTrainerPic();
 
 
         mAttachedCertificae.setOnClickListener(new View.OnClickListener() {
@@ -98,75 +113,121 @@ public class Apply_For_Trainer extends AppCompatActivity {
                                     Manifest.permission.READ_EXTERNAL_STORAGE,
                                     Manifest.permission.WRITE_EXTERNAL_STORAGE}
                             , REQUEST_CAMERA);
-                }
-                else {
-                    Intent intent = new Intent(Apply_For_Trainer.this , ImageUpload.class);
+                } else {
+                    Intent intent = new Intent(Apply_For_Trainer.this, ImageUpload.class);
+                    intent.putExtra("certiPic" , true);
                     startActivity(intent);
                 }
             }
         });
 
+        mAttachedTrainerPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ActivityCompat.checkSelfPermission(Apply_For_Trainer.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(Apply_For_Trainer.this,
+                            new String[]{Manifest.permission.CAMERA,
+                                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE}
+                            , REQUEST_CAMERA);
+                } else {
+                    Intent intent = new Intent(Apply_For_Trainer.this, ImageUpload.class);
+                    intent.putExtra("trainerPic" , true);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        mRadioGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  RadioButton rd = (RadioButton) findViewById(checkedId);
+                  gender = rd.getText().toString();
+                Toast.makeText(Apply_For_Trainer.this, ""+gender, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                trainerName = mEtxtrainerName.getEditText().getText().toString();
+                trainerEmail  = mEtxtrainerEmail.getEditText().getText().toString();
+                trainerCity = mEtxtrainerCity.getEditText().getText().toString();
+                if(TextUtils.isEmpty(trainerName)){
+                    mEtxtrainerName.setError("Please enter name");
+                    mEtxtrainerName.requestFocus();
+                    return;
+                }
+                else if(TextUtils.isEmpty(trainerEmail)){
+                    mEtxtrainerEmail.setError("Please enter email");
+                    mEtxtrainerEmail.requestFocus();
 
-                Intent intent = new Intent(Apply_For_Trainer.this, Apply_For_Trainer_2.class);
-                startActivity(intent);
+                    return;
+                }
+                else if(!trainerEmail.matches("^[a-zA-Z0-9_+&*-]+(?:\\."+
+                        "[a-zA-Z0-9_+&*-]+)*@" +
+                        "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                        "A-Z]{2,7}$")){
+                    mEtxtrainerEmail.setError("Please enter valid email");
+                    mEtxtrainerEmail.requestFocus();
+                    return;
+                }
+                else if(TextUtils.isEmpty(trainerCity)){
+                    mEtxtrainerCity.setError("Please Enter City");
+                    mEtxtrainerCity.requestFocus();
+                    return;
+                }
+                else if(certi_picList.size() ==0){
+                    Toast.makeText(Apply_For_Trainer.this, "Please Attached Certificate", Toast.LENGTH_SHORT).show();
+                }
+                else if(trainerPicPojoList.size() == 0){
+                    Toast.makeText(Apply_For_Trainer.this, "Please Attached Pic", Toast.LENGTH_SHORT).show();
+                }
 
-                User trainerData = new User(true, "shivam", "s@gmail.com",
-                        "hisar", "akfkljf", "s@gmail,com", "s@gmail,com",
-                        "s@gmail,com", "s@gmail,com");
+                else {
+                    Intent intent = new Intent(Apply_For_Trainer.this, Apply_For_Trainer_2.class);
+                    intent.putExtra("name" , trainerName);
+                    intent.putExtra("email" , trainerEmail);
+                    intent.putExtra("city" , trainerCity);
+                    intent.putExtra("gender" , gender);
+                    startActivity(intent);
+                }
 
-                Call<User> call = ApiClientInterface.getTrainerApiService().applyfortrainer(token, trainerData);
-                call.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        if (response.code() == 200) {
-                            Toast.makeText(Apply_For_Trainer.this, "Success", Toast.LENGTH_SHORT).show();
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(Apply_For_Trainer.this, "failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
         });
 
     }
 
     private void getTrainerPic() {
+        mDetails_1_Progressbar.setVisibility(View.VISIBLE);
         Call<List<TrainerPicPojo>> call = ApiClientInterface.getTrainerApiService().getTrainer_Pic(token);
 
         call.enqueue(new Callback<List<TrainerPicPojo>>() {
             @Override
             public void onResponse(Call<List<TrainerPicPojo>> call, Response<List<TrainerPicPojo>> response) {
 
-                if(response.code() == 200 ){
+                if (response.code() == 200) {
+                    mDetails_1_Progressbar.setVisibility(View.GONE);
                     trainerPicPojoList = response.body();
                     assert trainerPicPojoList != null;
-                    if(trainerPicPojoList.size() == 0){
+                    if (trainerPicPojoList.size() == 0) {
 
                     }
-                    mTrainerPic_Adapter = new Trainer_Pic_Adapter(trainerPicPojoList,Apply_For_Trainer.this);
+                    mTrainerPic_Adapter = new Trainer_Pic_Adapter(trainerPicPojoList, Apply_For_Trainer.this);
                     mTrainer_Pic_Recycle.setAdapter(mTrainerPic_Adapter);
                     mTrainer_Pic_Recycle.setVisibility(View.VISIBLE);
                     mTrainerPic_Adapter.notifyDataSetChanged();
-                    Toast.makeText(Apply_For_Trainer.this, "Success Trainer Pic", Toast.LENGTH_SHORT).show();
-                }
-                else if(response.code() == 404){
 
+                } else if (response.code() == 404) {
+                    mDetails_1_Progressbar.setVisibility(View.GONE);
                     mTrainer_Pic_Recycle.setVisibility(View.GONE);
-                    Toast.makeText(Apply_For_Trainer.this, ""+response.code(), Toast.LENGTH_SHORT).show();
-                }
-
-                else {
+                    Toast.makeText(Apply_For_Trainer.this, "" + response.code(), Toast.LENGTH_SHORT).show();
+                } else {
+                    mDetails_1_Progressbar.setVisibility(View.GONE);
                     Toast.makeText(Apply_For_Trainer.this, "try after", Toast.LENGTH_SHORT).show();
                 }
-
 
 
             }
@@ -174,41 +235,42 @@ public class Apply_For_Trainer extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<TrainerPicPojo>> call, Throwable t) {
                 try {
+                    mDetails_1_Progressbar.setVisibility(View.GONE);
                     Toast.makeText(Apply_For_Trainer.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
             }
         });
     }
 
-    private void getSlipPic() {
+    private void getCertiPic() {
+        mDetails_1_Progressbar.setVisibility(View.VISIBLE);
         Call<List<CertificatePhotoPojo>> call = ApiClientInterface.getTrainerApiService().getCerti_Pic(token);
 
         call.enqueue(new Callback<List<CertificatePhotoPojo>>() {
             @Override
             public void onResponse(Call<List<CertificatePhotoPojo>> call, Response<List<CertificatePhotoPojo>> response) {
 
-                if(response.code() == 200 ){
+                if (response.code() == 200) {
+                    mDetails_1_Progressbar.setVisibility(View.GONE);
                     certi_picList = response.body();
                     assert certi_picList != null;
-                    if(certi_picList.size() == 0){
+                    if (certi_picList.size() == 0) {
 
                     }
-                    mCertiPic_Adpter = new Certificate_Pic_Adapter(certi_picList,Apply_For_Trainer.this);
+                    mCertiPic_Adpter = new Certificate_Pic_Adapter(certi_picList, Apply_For_Trainer.this);
                     mCerti_Recycle.setAdapter(mCertiPic_Adpter);
                     mCerti_Recycle.setVisibility(View.VISIBLE);
                     mCertiPic_Adpter.notifyDataSetChanged();
-                    Toast.makeText(Apply_For_Trainer.this, "Success", Toast.LENGTH_SHORT).show();
-                }
-                else if(response.code() == 404){
 
+                } else if (response.code() == 404) {
+                    mDetails_1_Progressbar.setVisibility(View.GONE);
                     mCerti_Recycle.setVisibility(View.GONE);
-                    Toast.makeText(Apply_For_Trainer.this, ""+response.code(), Toast.LENGTH_SHORT).show();
-                }
-
-                else {
+                    Toast.makeText(Apply_For_Trainer.this, "" + response.code(), Toast.LENGTH_SHORT).show();
+                } else {
+                    mDetails_1_Progressbar.setVisibility(View.GONE);
                     Toast.makeText(Apply_For_Trainer.this, "try after", Toast.LENGTH_SHORT).show();
                 }
-
 
 
             }
@@ -216,8 +278,10 @@ public class Apply_For_Trainer extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<CertificatePhotoPojo>> call, Throwable t) {
                 try {
+                    mDetails_1_Progressbar.setVisibility(View.GONE);
                     Toast.makeText(Apply_For_Trainer.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
             }
         });
     }
@@ -229,16 +293,25 @@ public class Apply_For_Trainer extends AppCompatActivity {
     }
 
     private void initView() {
+        mDetails_1_Progressbar = findViewById(R.id.detils1Progressbar);
         mCerti_Recycle = findViewById(R.id.certificate_Reycle);
         mAttachedCertificae = findViewById(R.id.attached_certificae);
         mAttachedTrainerPic = findViewById(R.id.attached_trainerPic);
         mTrainer_Pic_Recycle = findViewById(R.id.trainerPic_Reycle);
+        mBckBtnApply = findViewById(R.id.bck_btn_apply);
+        mEtxtrainerName = findViewById(R.id.etxtrainerName);
+        mEtxtrainerEmail = findViewById(R.id.etxtrainerEmail);
+        mEtxtrainerCity = findViewById(R.id.etxtrainerCity);
+        mRadioGrp = findViewById(R.id.radioGrp);
+        mRadioM = findViewById(R.id.radioM);
+        mRadioF = findViewById(R.id.radioF);
+        mApplybtn = findViewById(R.id.applybtn);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getSlipPic();
+        getCertiPic();
         getTrainerPic();
     }
 }

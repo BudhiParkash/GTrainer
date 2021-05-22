@@ -18,7 +18,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/bck_btn_apply"
+                android:id="@+id/bck_btn_apply2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -30,7 +30,6 @@
 
 
             <TextView
-                android:id="@+id/toolbar_User_Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -53,7 +52,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_margin="10dp"
-                android:id="@+id/trainerName"
+                android:id="@+id/etxtrainerExperince"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -79,7 +78,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_margin="10dp"
-                android:id="@+id/trainerEmail"
+                android:id="@+id/etxtrainerabout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -104,7 +103,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_margin="10dp"
-                android:id="@+id/trainerCity"
+                android:id="@+id/etxaddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -129,6 +128,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etxlanguage"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
 
             <Button
                 android:layout_marginTop="24dp"
-                android:id="@+id/applybtn"
+                android:id="@+id/btnfinish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -170,6 +170,13 @@
 
     </LinearLayout>
 
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/trainerdetail_Progressbar"
+        android:visibility="gone"/>
 
 
 

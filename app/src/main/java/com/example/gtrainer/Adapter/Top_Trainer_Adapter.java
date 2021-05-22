@@ -20,9 +20,9 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class Top_Trainer_Adapter extends RecyclerView.Adapter<Top_Trainer_Adapter.ViewHolder> {
-    UrlLink urls = new UrlLink();
-    private final String url = urls.url;
-    private List<User> data;
+    static UrlLink urls = new UrlLink();
+    private final static String url = urls.url;
+    private static List<User> data;
     static Context context;
 
 
@@ -50,7 +50,7 @@ public class Top_Trainer_Adapter extends RecyclerView.Adapter<Top_Trainer_Adapte
             Picasso.get().load(picurl).into(holder.mTopTranierPic);
         }
 
-        for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
+        for (int i= 0 ; i< userData.getRatings().size(); i++ ){
             String rating = userData.getRatings().get(i).getRating();
             holder.mTopTrainerRating.setText(rating);
         }
@@ -85,8 +85,48 @@ public class Top_Trainer_Adapter extends RecyclerView.Adapter<Top_Trainer_Adapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String picurl ="";
+                    String rating ="";
+                    String trainerName ="";
+                    String aboutTrainer="";
+                    int trainerPrice =0;
+                    String expirence ="";
+                    String tranierId ="";
+
+                    User userData = data.get(getAdapterPosition());
+                    try {
+                        for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
+                            picurl = url+ userData.getTrainerPic().get(i).getPic();
+
+                        }
+
+                        for (int i= 0 ; i< userData.getRatings().size(); i++ ){
+                            rating = userData.getRatings().get(i).getRating();
+
+                        }
+                        trainerName = userData.getUser_name();
+                        aboutTrainer = userData.getAboutUser();
+                        trainerPrice = userData.getPrice();
+                        expirence = userData.getExperiance();
+                        tranierId = userData.getId();
+
+
+
+                    }
+
+                    catch (Exception e){
+
+                    }
                     Intent intent = new Intent(context, TrainerProfileActivity.class);
+                    intent.putExtra("trainerName", trainerName);
+                    intent.putExtra("aboutTrainer" , aboutTrainer);
+                    intent.putExtra("trainerPrice" , trainerPrice);
+                    intent.putExtra("trainerRating", rating);
+                    intent.putExtra("picUrl",picurl);
+                    intent.putExtra("expirence" , expirence);
+                    intent.putExtra("tranierId" , tranierId);
                     context.startActivity(intent);
+
                 }
             });
 

@@ -47,6 +47,8 @@ public class ImageUpload extends AppCompatActivity {
     String tokken;
 
     Uri imageUri;
+    boolean is_trainer_Pic = false;
+    boolean is_certi_pic = false;
 
 
 
@@ -71,6 +73,11 @@ public class ImageUpload extends AppCompatActivity {
         onclick = getIntent().getStringExtra("OnClick");
         initView();
 
+        SharedPreferences prefs = Objects.requireNonNull(this).getSharedPreferences("ProfileData", MODE_PRIVATE);
+        tokken = prefs.getString("tokken", "no tokkens");
+        is_certi_pic = getIntent().getBooleanExtra("certiPic" , false);
+        is_trainer_Pic = getIntent().getBooleanExtra("trainerPic", false);
+
 
         mBpicselector.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,24 +91,36 @@ public class ImageUpload extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                try {
-                    mBpicselector.setClickable(false);
-                    mBpicselector.setEnabled(false);
-                    mBupload.setClickable(false);
-                    mBupload.setEnabled(false);
-                    mSpinKit222.setVisibility(View.VISIBLE);
-                    uploading = true;
-                    uploadImage(getBytes(is));
+                if(imageView.getDrawable() == null){
+                    Toast.makeText(ImageUpload.this, "Please Select Pic", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                else {
+
+                    try {
+                        mBpicselector.setClickable(false);
+                        mBpicselector.setEnabled(false);
+                        mBupload.setClickable(false);
+                        mBupload.setEnabled(false);
+                        mSpinKit222.setVisibility(View.VISIBLE);
+                        uploading = true;
+                        if (is_certi_pic) {
+                            upload_Certi_Image(getBytes(is));
+                        } else {
+                            upload_Trainer_Image(getBytes(is));
+                        }
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
 
         //Get Tokken
-        SharedPreferences prefs = Objects.requireNonNull(this).getSharedPreferences("ProfileData", MODE_PRIVATE);
-        tokken = prefs.getString("tokken", "no tokkens");
+        ;
         //  pDialog = new ProgressDialog(ImageUpload.this);
         // showProgress("Uploading image");
 //        assert onclick != null;
@@ -148,8 +167,6 @@ public class ImageUpload extends AppCompatActivity {
         if(requestCode == PICK_IMAGE && resultCode == -1 && data!= null && data.getData()!= null){
             imageUri = data.getData();
 
-
-
             try {
                 is = getContentResolver().openInputStream(data.getData());
 
@@ -164,7 +181,57 @@ public class ImageUpload extends AppCompatActivity {
         }
     }
 
-    private void uploadImage(byte[] imageBytes){
+    private void upload_Trainer_Image(byte[] imageBytes){
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
+        MultipartBody.Part slipImage = MultipartBody.Part.createFormData("DocImage", "img.jpg",requestFile);
+
+
+        Call call =  ApiClientInterface.getTrainerApiService().uploadTrainerImage(tokken,slipImage);
+
+        call.enqueue(new retrofit2.Callback() {
+            @Override
+            public void onResponse(retrofit2.Call call, retrofit2.Response response) {
+                if(response.code() == 201) {
+                    Toast.makeText(ImageUpload.this, "Upload Successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                else{
+                    Toast.makeText(ImageUpload.this, "Not Upload", Toast.LENGTH_SHORT).show();
+                    mBpicselector.setClickable(true);
+                    mBupload.setClickable(true);
+                    mBupload.setEnabled(true);
+                    mSpinKit222.setVisibility(View.INVISIBLE);
+                    uploading = false;
+                    mBpicselector.setEnabled(true);
+
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call call, Throwable t) {
+                Toast.makeText(ImageUpload.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                mBpicselector.setClickable(true);
+                mBupload.setClickable(true);
+                mBupload.setEnabled(true);
+                mSpinKit222.setVisibility(View.INVISIBLE);
+                uploading = false;
+
+
+            }
+        });
+
+
+
+
+
+
+    }
+
+    private void upload_Certi_Image(byte[] imageBytes){
 
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
         MultipartBody.Part slipImage = MultipartBody.Part.createFormData("DocImage", "img.jpg",requestFile);

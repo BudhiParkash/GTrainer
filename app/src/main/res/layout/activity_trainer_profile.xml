@@ -30,7 +30,7 @@
                 />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/toolbar_Image"
+                android:id="@+id/toolbar_Image_profile"
                 android:layout_marginStart="10dp"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -63,14 +63,16 @@
          android:layout_height="match_parent">
 
          <TextView
+             android:id="@+id/profle_rating"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:drawableTop="@drawable/ic_star"
              android:layout_alignParentEnd="true"
              android:layout_margin="20dp"
              android:textColor="@color/colorPrimary"
-             android:text="4.5/5.0"
-             android:textSize="16sp"/>
+             android:text="5"
+             android:textAlignment="center"
+             android:textSize="20sp"/>
 
 
         <LinearLayout
@@ -90,15 +92,18 @@
 
 
                 <ImageView
+                    android:id="@+id/profile_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/johncina"
+                    android:scaleType="centerCrop"
                     />
 
             </com.google.android.material.card.MaterialCardView>
 
 
             <TextView
+                android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textcolor"
@@ -108,6 +113,7 @@
                 android:text="John Cina"/>
 
             <TextView
+                android:id="@+id/gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textcolor"
@@ -117,6 +123,7 @@
                 android:text="Male"/>
 
             <TextView
+                android:id="@+id/experince"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textcolor"
@@ -127,6 +134,7 @@
 
 
             <TextView
+                android:id="@+id/profile_about_trainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textcolor"
@@ -139,6 +147,7 @@ Participate in the Unacademy Combat, a weekly "/>
 
 
             <Button
+                android:id="@+id/btnBook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
@@ -204,4 +213,11 @@ Participate in the Unacademy Combat, a weekly "/>
         </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/trainerProfile_Progressbar"/>
 </RelativeLayout>
