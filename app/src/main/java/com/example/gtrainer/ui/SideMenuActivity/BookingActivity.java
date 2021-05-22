@@ -62,10 +62,6 @@ public class BookingActivity extends AppCompatActivity  {
         mBookingRecycle.setHasFixedSize(true);
         mBookingRecycle.setLayoutManager(new LinearLayoutManager(BookingActivity.this, LinearLayoutManager.VERTICAL,false));
 
-
-
-
-
     }
 
     private void getBookedTrainer(String tranierid) {
@@ -74,12 +70,11 @@ public class BookingActivity extends AppCompatActivity  {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.code() == 200){
-                    Toast.makeText(BookingActivity.this, "get Booked Trainer", Toast.LENGTH_SHORT).show();
                     User user = response.body();
 
                     bookedtainer.add(user);
 
-                    mBookingAdapter  = new BookingAdapter(bookedtainer , BookingActivity.this);
+                    mBookingAdapter  = new BookingAdapter(bookedtainer , BookingActivity.this  ,bookinglist);
                     mBookingRecycle.setAdapter(mBookingAdapter);
                     mBookingAdapter.notifyDataSetChanged();
 
@@ -107,24 +102,23 @@ public class BookingActivity extends AppCompatActivity  {
                 if(response.code() == 200){
                     bookinglist = response.body();
                     assert bookinglist != null;
-                    Toast.makeText(BookingActivity.this, "size" + bookinglist.size(), Toast.LENGTH_SHORT).show();
                     for (int i = 0; i < bookinglist.size(); i++){
                         tranierid = bookinglist.get(i).getTrainerID();
-                        Toast.makeText(BookingActivity.this, ""+tranierid, Toast.LENGTH_SHORT).show();
                         getBookedTrainer(tranierid);
                     }
 
-
-
-
                 }
                 else {
+
+                    Toast.makeText(BookingActivity.this, "try after somttimes" +response.code(), Toast.LENGTH_SHORT).show();
 
                 }
             }
 
             @Override
             public void onFailure(Call<List<BookingPojo>> call, Throwable t) {
+
+                Toast.makeText(BookingActivity.this, "try after sometimes" +t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

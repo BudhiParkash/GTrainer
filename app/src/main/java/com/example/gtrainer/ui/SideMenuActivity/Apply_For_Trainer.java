@@ -4,7 +4,9 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -41,13 +43,14 @@ import retrofit2.Response;
 
 public class Apply_For_Trainer extends AppCompatActivity {
 
-    Button mApply;
+    Button mbtnNext;
 
     SharedPreferences preferences;
     private TextView mAttachedCertificae;
     private TextView mAttachedTrainerPic;
 
     private static final int REQUEST_CAMERA = 1;
+    private static final int REQUEST_Gallery = 2;
 
     RecyclerView mCerti_Recycle;
     private List<CertificatePhotoPojo> certi_picList;
@@ -66,7 +69,7 @@ public class Apply_For_Trainer extends AppCompatActivity {
     private RadioGroup mRadioGrp;
     private RadioButton mRadioM;
     private RadioButton mRadioF;
-    private Button mApplybtn;
+
 
     private String trainerName;
     private String trainerEmail;
@@ -93,7 +96,7 @@ public class Apply_For_Trainer extends AppCompatActivity {
         mTrainer_Pic_Recycle.setLayoutManager(new LinearLayoutManager(Apply_For_Trainer.this, LinearLayoutManager.HORIZONTAL, false));
 
 
-        mApply = findViewById(R.id.applybtn);
+
 
         preferences = getSharedPreferences("ProfileData", MODE_PRIVATE);
 
@@ -112,7 +115,7 @@ public class Apply_For_Trainer extends AppCompatActivity {
                             new String[]{Manifest.permission.CAMERA,
                                     Manifest.permission.READ_EXTERNAL_STORAGE,
                                     Manifest.permission.WRITE_EXTERNAL_STORAGE}
-                            , REQUEST_CAMERA);
+                            , REQUEST_Gallery);
                 } else {
                     Intent intent = new Intent(Apply_For_Trainer.this, ImageUpload.class);
                     intent.putExtra("certiPic" , true);
@@ -124,7 +127,9 @@ public class Apply_For_Trainer extends AppCompatActivity {
         mAttachedTrainerPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(Apply_For_Trainer.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(Apply_For_Trainer.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) +
+                        ActivityCompat.checkSelfPermission(Apply_For_Trainer.this ,Manifest.permission.READ_EXTERNAL_STORAGE) +
+                        ActivityCompat.checkSelfPermission(Apply_For_Trainer.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(Apply_For_Trainer.this,
                             new String[]{Manifest.permission.CAMERA,
                                     Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -147,7 +152,7 @@ public class Apply_For_Trainer extends AppCompatActivity {
             }
         });
 
-        mApply.setOnClickListener(new View.OnClickListener() {
+        mbtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -198,6 +203,51 @@ public class Apply_For_Trainer extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CAMERA: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    try {
+                        Intent intent = new Intent(Apply_For_Trainer.this, ImageUpload.class);
+                        intent.putExtra("trainerPic" , true);
+                        startActivity(intent);
+
+                    }
+                    catch (Exception e){}
+                } else {
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                    intent.setData(uri);
+                    startActivityForResult(intent,1231);
+                    Toast.makeText(this, "Please allow permission from setting", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+            case REQUEST_Gallery:{
+
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    try {
+                        Intent intent = new Intent(Apply_For_Trainer.this, ImageUpload.class);
+                        intent.putExtra("certiPic" , true);
+                        startActivity(intent);
+
+                    }
+                    catch (Exception e){}
+                } else {
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                    intent.setData(uri);
+                    startActivityForResult(intent,1231);
+                    Toast.makeText(this, "Please allow permission from setting", Toast.LENGTH_SHORT).show();
+                }
+                return;
+
+            }
+        }
     }
 
     private void getTrainerPic() {
@@ -305,7 +355,7 @@ public class Apply_For_Trainer extends AppCompatActivity {
         mRadioGrp = findViewById(R.id.radioGrp);
         mRadioM = findViewById(R.id.radioM);
         mRadioF = findViewById(R.id.radioF);
-        mApplybtn = findViewById(R.id.applybtn);
+        mbtnNext = findViewById(R.id.applybtn);
     }
 
     @Override

@@ -229,7 +229,7 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
 
     private void doBooking() {
         mProfile_Progressbar.setVisibility(View.VISIBLE);
-        BookingPojo bookingData = new BookingPojo(tranierId , userId , price , "two months" , "21/7/2021"  );
+        BookingPojo bookingData = new BookingPojo(userId ,tranierId , price , "two months" , "21/7/2021"  );
 
         Call<BookingPojo> call = ApiClientInterface.getTrainerApiService().postBooking(tokken , bookingData);
         call.enqueue(new Callback<BookingPojo>() {

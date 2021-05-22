@@ -90,14 +90,10 @@ public class ImageUpload extends AppCompatActivity {
         mBupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(imageView.getDrawable() == null){
+                if(is == null){
                     Toast.makeText(ImageUpload.this, "Please Select Pic", Toast.LENGTH_SHORT).show();
-                    return;
                 }
-
                 else {
-
                     try {
                         mBpicselector.setClickable(false);
                         mBpicselector.setEnabled(false);
@@ -116,28 +112,12 @@ public class ImageUpload extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-            }
+
+
+                }
+
         });
 
-        //Get Tokken
-        ;
-        //  pDialog = new ProgressDialog(ImageUpload.this);
-        // showProgress("Uploading image");
-//        assert onclick != null;
-//        if (savedInstanceState != null) {
-//            currentCameraPhotoPath = savedInstanceState.getString(CAMERA_IMAGE_PATH);
-//            if (currentCameraPhotoPath != null) {
-//                files.clear();
-//                files.add(currentCameraPhotoPath);
-//                uploadFiles();
-//            }
-//        } else {
-//            if (onclick.equals("camera")) {
-//                GoOnCamera();
-//            } else {
-//                GoOnGallery();
-//            }
-//        }
     }
 
     private void chossingImage() {
@@ -206,9 +186,6 @@ public class ImageUpload extends AppCompatActivity {
                     mBpicselector.setEnabled(true);
 
                 }
-
-
-
             }
 
             @Override
@@ -282,68 +259,6 @@ public class ImageUpload extends AppCompatActivity {
 
     }
 
-
-//    public void uploadFiles() {
-//        File[] filesToUpload = new File[files.size()];
-//        for (int i = 0; i < files.size(); i++) {
-//            filesToUpload[i] = new File(files.get(i));
-//        }
-//
-//        FileUpload fileUploader = new FileUpload();
-//        fileUploader.uploadFiles(this, tokken, filesToUpload, new FileUpload.FileUploaderCallback() {
-//            @Override
-//            public void onError() {
-//                //   hideProgress();
-//                files.clear();
-//                Toast.makeText(ImageUpload.this, "Some error occurred. Please retry", Toast.LENGTH_SHORT).show();
-//                finish();
-//            }
-//
-//            @Override
-//            public void onFinish(String[] responses) {
-//                // hideProgress();
-//                /*for (String respons : responses) {
-//                    Log.e("RESPONSE - " + respons, respons);
-//                }*/
-//                files.clear();
-//                finish();
-//            }
-//
-//            @Override
-//            public void onProgressUpdate(int currentpercent, int totalpercent, int filenumber) {
-//                //   updateProgress(totalpercent, "Uploading image", "");
-//            }
-//        });
-//
-//
-//    }
-
-//    public void updateProgress(int val, String title, String msg) {
-//        pDialog.setTitle(title);
-//        pDialog.setMessage(msg);
-//        pDialog.setProgress(val);
-//    }
-
-//    public void showProgress(String str) {
-//        try {
-//            pDialog.setCancelable(false);
-//            pDialog.setTitle("Please wait");
-//            pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-//            pDialog.setMax(100); // Progress Dialog Max Value
-//            pDialog.setMessage(str);
-//            if (pDialog.isShowing())
-//                pDialog.dismiss();
-//            pDialog.show();
-//        } catch (Exception e) { Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show(); }
-//    }
-
-//    public void hideProgress() {
-//        try {
-//            if (pDialog.isShowing())
-//                pDialog.dismiss();
-//        } catch (Exception e) { Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show(); }
-//
-//    }
 
     @Override
     public void onBackPressed() {

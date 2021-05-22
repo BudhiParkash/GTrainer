@@ -1,5 +1,6 @@
 package com.example.gtrainer.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -30,11 +32,7 @@ import retrofit2.Response;
 public class All_List_Trainer extends AppCompatActivity {
 
     private List<User> topTrainerList = new ArrayList<>();
-
-    private TrainerListPojo trainerListPojo;
-
     private Top_Trainer_Adapter top_trainer_adapter;
-
     DiscreteScrollView toptrainerRecycle;
 
 
@@ -43,12 +41,15 @@ public class All_List_Trainer extends AppCompatActivity {
 
    private RecyclerView mAllTrainerRecycle;
    private  AllTrainerList_Adpter mAllTrainer_Adapter;
-
-
    private List<User> alltrainerList = new ArrayList<User>();
 
    private ProgressBar mAllList_progress;
 
+    Boolean isScrolling = false;
+    int currentItem,totalItem,scrollOutItem;
+    LinearLayoutManager manager;
+    int  PageNo = 0;
+    boolean noScroll = false;
 
 
 
@@ -61,31 +62,70 @@ public class All_List_Trainer extends AppCompatActivity {
         toptrainerRecycle = findViewById(R.id.toptrainerRecycle2);
         mAllTrainerRecycle = findViewById(R.id.all_Trainer_Recycle);
 
+        manager = new LinearLayoutManager(this);
+
         mAllList_progress.setVisibility(View.VISIBLE);
 
         mAllTrainerRecycle.setHasFixedSize(true);
-        mAllTrainerRecycle.setLayoutManager(new LinearLayoutManager(All_List_Trainer.this, LinearLayoutManager.VERTICAL,false));
+        mAllTrainerRecycle.setLayoutManager(manager);
+
 
         prefs = getSharedPreferences("ProfileData", MODE_PRIVATE);
         tokken = prefs.getString("tokken","no tokkens");
 
-        getTopTrainers();
         getallTrainers();
+        getTopTrainers();
+
+        mAllTrainerRecycle.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){ isScrolling = true;}
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                currentItem = manager.getChildCount();
+                totalItem = manager.getItemCount();
+                scrollOutItem = manager.findFirstCompletelyVisibleItemPosition();
+
+                if(isScrolling && (currentItem + scrollOutItem == totalItem)){
+                    isScrolling = false;
+                    getallTrainers();
+                }
+            }
+        });
+
+
+
+
 
 
     }
 
     private void getallTrainers() {
+
+        PageNo =  PageNo + 1;
+        int  limit = 10;
+        int  Skip = (PageNo - 1)*limit;
+
+        if(noScroll){
+            return;
+        }
         mAllList_progress.setVisibility(View.VISIBLE);
-        Call<TrainerListPojo> call  = ApiClientInterface.getTrainerApiService().getAllTrainer(tokken , 1 ,10);
+        Call<TrainerListPojo> call  = ApiClientInterface.getTrainerApiService().getAllTrainer(tokken , limit ,Skip);
         call.enqueue(new Callback<TrainerListPojo>() {
             @Override
             public void onResponse(Call<TrainerListPojo> call, Response<TrainerListPojo> response) {
                 if(response.code() == 200){
                     mAllList_progress.setVisibility(View.GONE);
                     assert response.body() != null;
+                    if (response.body() == null) {
+                        noScroll = true;
+                        return;
+                    }
                     TrainerListPojo trainerListPojo = response.body();
-
                     alltrainerList.addAll(trainerListPojo.getSearchResult());
 
 

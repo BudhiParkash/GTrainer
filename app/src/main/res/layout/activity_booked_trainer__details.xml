@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.TrainerProfileActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/bck_btn_bookeddetails"
+                android:layout_width="16pt"
+                android:layout_height="18pt"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_arrow_back"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"
+                />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/toolbar_Image_bookedtrainer"
+                android:layout_marginStart="10dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:civ_border_color="@color/colorPrimary"
+                android:scaleType="centerCrop"
+                android:src="@drawable/johncina"
+                android:padding="5dp"/>
+
+            <TextView
+                android:id="@+id/toolbar_bookedtrainer_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Jhon Cena"
+                android:textSize="20sp"
+                android:textColor="@color/textcolor"
+                android:layout_marginStart="12dp"/>
+
+        </LinearLayout>
+
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="160dp"
+                        android:layout_height="280dp"
+                        android:layout_gravity="center"
+                        app:strokeWidth="2dp"
+                        app:cardCornerRadius="5dp"
+                        app:strokeColor="@color/colorPrimary">
+
+
+                        <ImageView
+                            android:id="@+id/bookedtrainer_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/johncina"
+                            android:scaleType="centerCrop"
+                            />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_margin="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:text="Name - "
+                                android:textSize="16sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:id="@+id/bookedtrainer_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolor"
+                                android:textSize="16sp"
+                                android:text="John Cina"/>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:text="Gender - "
+                                android:textSize="16sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:id="@+id/bookedtrainer_gender"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolor"
+                                android:textSize="16sp"
+                                android:text="Male"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:text="Payment - "
+                                android:textSize="16sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:id="@+id/payment"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolor"
+                                android:textSize="16sp"
+                                android:text="500 Rs."/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:text="Date of Booking -"
+                                android:textSize="16sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:id="@+id/dateofbooking"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolor"
+                                android:textSize="16sp"
+                                android:text="22/10/2021"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:text="Period of Booking -"
+                                android:textSize="16sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:id="@+id/periodofbooking"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolor"
+                                android:textSize="16sp"
+                                android:text="3 Months"/>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:text="Booking Last Date -"
+                                android:textSize="16sp"
+                                android:textColor="@color/textcolor"/>
+
+                            <TextView
+                                android:id="@+id/lastdateofbooking"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolor"
+                                android:textSize="16sp"
+                                android:text="22/01/2022"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                    <Button
+                        android:id="@+id/btnCancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/roundbutton"
+                        android:clickable="true"
+
+                        android:text="Cancel Booking" />
+
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/bookedtrainerdetails_Progressbar"/>
+</RelativeLayout>
