@@ -63,14 +63,8 @@ public class Trainer_Pic_Adapter extends RecyclerView.Adapter<Trainer_Pic_Adapte
         public TrainerPicViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mCertiPic = itemView.findViewById(R.id.certiPicdemo);
+            mCertiPic = itemView.findViewById(R.id.profile);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "oooooooo", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
     }
 }

@@ -64,7 +64,7 @@ public class Certificate_Pic_Adapter extends RecyclerView.Adapter<Certificate_Pi
         public CertiPicViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mCertiPic = itemView.findViewById(R.id.certiPicdemo);
+            mCertiPic = itemView.findViewById(R.id.profile);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

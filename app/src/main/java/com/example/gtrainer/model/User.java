@@ -168,9 +168,9 @@ public class User {
         this.phoneNum = phoneNum;
     }
 
-    public User(String user_name, String email) {
+    public User(String user_name) {
         this.user_name = user_name;
-        this.email = email;
+
     }
 
 

@@ -91,7 +91,7 @@ public class Apply_For_Trainer extends AppCompatActivity {
         mCerti_Recycle.setHasFixedSize(true);
         mCerti_Recycle.setLayoutManager(new LinearLayoutManager(Apply_For_Trainer.this, LinearLayoutManager.HORIZONTAL, false));
 
-        certi_picList = new ArrayList<>();
+        trainerPicPojoList = new ArrayList<>();
         mTrainer_Pic_Recycle.setHasFixedSize(true);
         mTrainer_Pic_Recycle.setLayoutManager(new LinearLayoutManager(Apply_For_Trainer.this, LinearLayoutManager.HORIZONTAL, false));
 

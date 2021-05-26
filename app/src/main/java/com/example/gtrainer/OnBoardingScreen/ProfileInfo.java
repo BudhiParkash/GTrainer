@@ -33,14 +33,10 @@ public class ProfileInfo extends AppCompatActivity {
     private CircleImageView mUserPic;
     private EditText mEtxtName;
     private TextView mTxtphonenumber;
-    private EditText mEtxtEmail;
-    private EditText mEtxtAge;
-    private RadioGroup mRadioGrp;
-    private RadioButton mRadioM;
-    private RadioButton mRadioF;
+
     private ProgressBar mProfileProgreeBar;
 
-    String name , email , age;
+    String name ;
     SharedPreferences prfs;
     private SharedPreferences.Editor editor;
 
@@ -54,6 +50,9 @@ public class ProfileInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_info);
         initView();
+        mEtxtName.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(mEtxtName, InputMethodManager.HIDE_IMPLICIT_ONLY);
         editor = getSharedPreferences("ProfileData", MODE_PRIVATE).edit();
         editor.apply();
         try {
@@ -64,49 +63,20 @@ public class ProfileInfo extends AppCompatActivity {
         }
         createUser();
 
-        mEtxtName.requestFocus();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(mEtxtName, InputMethodManager.HIDE_IMPLICIT_ONLY);
-
         mTxtNextProfileInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mProfileProgreeBar.setVisibility(View.VISIBLE);
                 name = mEtxtName.getText().toString();
-                email = mEtxtEmail.getText().toString();
-                age = mEtxtAge.getText().toString();
                 if(TextUtils.isEmpty(name)){
                     mEtxtName.setError("Please enter name");
                     mEtxtName.requestFocus();
                     mProfileProgreeBar.setVisibility(View.INVISIBLE);
                     return;
                 }
-                else if(TextUtils.isEmpty(email)){
-                    mEtxtEmail.setError("Please enter email");
-                    mEtxtEmail.requestFocus();
-                    mProfileProgreeBar.setVisibility(View.INVISIBLE);
-                    return;
-                }
-                else if(!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\."+
-                        "[a-zA-Z0-9_+&*-]+)*@" +
-                        "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                        "A-Z]{2,7}$")){
-                    mEtxtEmail.setError("Please enter valid email");
-                    mEtxtEmail.requestFocus();
-                    mProfileProgreeBar.setVisibility(View.INVISIBLE);
-                    return;
-                }
-//                else if(TextUtils.isEmpty(age)){
-//                    mEtxtAge.setError("Please enter age");
-//                    mEtxtAge.requestFocus();
-//                    mProfileProgreeBar.setVisibility(View.INVISIBLE);
-//                    return;
-//              }
                 else {
-                    postUserData(name , email);
-                    editor.putString("name" , name);
-                    editor.putString("email" , email);
-                    editor.apply();
+                    postUserData(name);
+
                 }
 
 
@@ -116,15 +86,17 @@ public class ProfileInfo extends AppCompatActivity {
 
     }
 
-    private void postUserData(String name , String email) {
+    private void postUserData(String name) {
 
-        User userData = new User(name , email);
+        User userData = new User(name);
 
         Call<User>  call = ApiClientInterface.getTrainerApiService().postUserData(tokken , userData);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if((response.code() == 200)){
+                    editor.putString("name" , name);
+                    editor.apply();
                     Intent intent = new Intent(ProfileInfo.this , MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -165,7 +137,6 @@ public class ProfileInfo extends AppCompatActivity {
                     tokken = userData.getToken();
                     userID = userData.getUser().getId();
                     mEtxtName.setText(userData.getUser().getUser_name());
-                    mEtxtEmail.setText(userData.getUser().getEmail());
                     editor.putString("tokken",tokken);
                     editor.putString("userId" , userID);
                     editor.apply();
@@ -176,7 +147,6 @@ public class ProfileInfo extends AppCompatActivity {
                     Toast.makeText(ProfileInfo.this, "Try after sometime", Toast.LENGTH_SHORT).show();
                 }
                 else {
-
                     Toast.makeText(ProfileInfo.this, "Try after sometime or contact to company" + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -192,11 +162,6 @@ public class ProfileInfo extends AppCompatActivity {
         mUserPic = findViewById(R.id.userPic);
         mEtxtName = findViewById(R.id.etxtName);
         mTxtphonenumber = findViewById(R.id.txtphonenumber);
-        mEtxtEmail = findViewById(R.id.etxtEmail);
-        mEtxtAge = findViewById(R.id.etxtAge);
-        mRadioGrp = findViewById(R.id.radioGrp);
-        mRadioM = findViewById(R.id.radioM);
-        mRadioF = findViewById(R.id.radioF);
         mProfileProgreeBar = findViewById(R.id.profileProgreeBar);
     }
 }

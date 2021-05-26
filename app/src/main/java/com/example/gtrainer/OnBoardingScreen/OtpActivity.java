@@ -172,6 +172,7 @@ public class OtpActivity extends AppCompatActivity  {
     //Verify code
     public void verifyCode(String code) {
         try {
+            mOtpProgressBar.setVisibility(View.VISIBLE);
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
             signInWithCredential(credential);
         }catch (Exception e){
@@ -189,6 +190,7 @@ public class OtpActivity extends AppCompatActivity  {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            mOtpProgressBar.setVisibility(View.GONE);
                             Intent i = new Intent(OtpActivity.this, ProfileInfo.class);
                             i.putExtra("num",onlyNumber);
                             startActivity(i);

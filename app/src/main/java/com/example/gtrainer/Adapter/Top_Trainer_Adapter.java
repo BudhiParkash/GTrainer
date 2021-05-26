@@ -2,6 +2,7 @@ package com.example.gtrainer.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gtrainer.Activity.TrainerProfileActivity;
 import com.example.gtrainer.Api.UrlLink;
 import com.example.gtrainer.R;
+import com.example.gtrainer.model.TrainerPicPojo;
 import com.example.gtrainer.model.User;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Top_Trainer_Adapter extends RecyclerView.Adapter<Top_Trainer_Adapter.ViewHolder> {
@@ -94,6 +97,8 @@ public class Top_Trainer_Adapter extends RecyclerView.Adapter<Top_Trainer_Adapte
                     String tranierId ="";
 
                     User userData = data.get(getAdapterPosition());
+                    List<TrainerPicPojo> list = new ArrayList<>();
+                    list = userData.getTrainerPic();
                     try {
                         for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
                             picurl = url+ userData.getTrainerPic().get(i).getPic();
@@ -125,6 +130,7 @@ public class Top_Trainer_Adapter extends RecyclerView.Adapter<Top_Trainer_Adapte
                     intent.putExtra("picUrl",picurl);
                     intent.putExtra("expirence" , expirence);
                     intent.putExtra("tranierId" , tranierId);
+                    intent.putParcelableArrayListExtra("picArray" , (ArrayList<? extends Parcelable>) list);
                     context.startActivity(intent);
 
                 }

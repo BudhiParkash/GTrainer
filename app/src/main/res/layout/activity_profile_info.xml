@@ -92,83 +92,13 @@
         android:layout_marginStart="20dp"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        />
 
 
-    <EditText
-        android:id="@+id/etxtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxHeight="50dp"
-        android:paddingStart="8dp"
-        android:inputType="text"
-        android:hint=" Enter Your Email Address"
-        android:textColorHint="@color/lighttextcolor"
-        android:layout_marginStart="20dp"
-        android:textColor="@color/textcolor"
-        android:maxLines="1"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Age"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        />
 
 
-    <EditText
-        android:id="@+id/etxtAge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxHeight="50dp"
-        android:paddingStart="8dp"
-        android:inputType="number"
-        android:maxLength="2"
-        android:textColor="@color/textcolor"
-        android:hint=" Enter Your Age"
-        android:textColorHint="@color/lighttextcolor"
-        android:layout_marginStart="20dp"
-        android:maxLines="1"/>
 
-    <RadioGroup
-        android:id="@+id/radioGrp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        >
-        <RadioButton
-            android:id="@+id/radioM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:checked="true"
-            android:textColor="@color/textcolor"
-            android:textSize="14dp"
-            android:text="Male"
-            />
-        <RadioButton
-            android:id="@+id/radioF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:checked="false"
-            android:textSize="14dp"
-            android:textColor="@color/textcolor"
-            android:text="Female"
-            />
-    </RadioGroup>
+
+
 
     <ProgressBar
         android:indeterminateTint="@color/colorPrimary"

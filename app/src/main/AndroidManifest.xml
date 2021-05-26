@@ -34,8 +34,7 @@
             android:name=".OnBoardingScreen.Login"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name=".OnBoardingScreen.SplashScreen"
-            android:theme="@style/Theme.GTrainer">
+            android:name=".OnBoardingScreen.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

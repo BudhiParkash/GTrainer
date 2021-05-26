@@ -62,7 +62,7 @@
          android:layout_width="match_parent"
          android:layout_height="match_parent">
 
-         <TextView
+      <!--   <TextView
              android:id="@+id/profle_rating"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
              android:textColor="@color/colorPrimary"
              android:text="5"
              android:textAlignment="center"
-             android:textSize="20sp"/>
+             android:textSize="20sp"/>-->
 
 
         <LinearLayout
@@ -81,14 +81,35 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle_trainer_Photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-            <com.google.android.material.card.MaterialCardView
+
+
+            <ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:id="@+id/profile_photo_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:spi_dotSize="10dp"
+                app:spi_dotSelectedSize="12dp"
+                app:spi_dotColor="@color/grey"
+                app:spi_dotSelectedColor="@color/colorPrimary"
+                />
+
+
+       <!--     <com.google.android.material.card.MaterialCardView
                 android:layout_width="160dp"
                 android:layout_height="280dp"
                 android:layout_gravity="center"
                 app:strokeWidth="2dp"
                 app:cardCornerRadius="5dp"
                 app:strokeColor="@color/colorPrimary">
+
 
 
                 <ImageView
@@ -99,7 +120,7 @@
                     android:scaleType="centerCrop"
                     />
 
-            </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>-->
 
 
             <TextView

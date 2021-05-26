@@ -33,8 +33,7 @@ public class SplashScreen extends AppCompatActivity {
         viewPager = findViewById(R.id.pager);
         spinKitView = findViewById(R.id.spin_kit_splash);
 
-        getWindow().setStatusBarColor(getResources().getColor(R.color.black));
-
+        getWindow().setStatusBarColor(getColor(R.color.black));
 
         FullScreencall();
         handler = new Handler();

@@ -30,7 +30,7 @@ public class ApiClientInterface {
     //http://192.168.1.7 brondband
     //http://192.168.73.72 PocoX2
     //http://192.168.43.72:3000/ shivaa
-    private static final String url = "http://192.168.73.72:3000/";
+    private static final String url = "http://192.168.1.6:3000/";
 
     public static GTrainerApiService gTrainerApiService = null;
 

@@ -3,6 +3,7 @@ package com.example.gtrainer.Activity;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,11 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
+import com.example.gtrainer.Adapter.Trainer_Pic_Adapter;
 import com.example.gtrainer.Api.ApiClientInterface;
 import com.example.gtrainer.R;
 import com.example.gtrainer.model.BookingPojo;
 import com.example.gtrainer.model.PayPojo;
+import com.example.gtrainer.model.TrainerPicPojo;
+import com.example.gtrainer.ui.SideMenuActivity.Apply_For_Trainer;
 import com.example.gtrainer.ui.SideMenuActivity.BookingActivity;
 import com.google.gson.JsonObject;
 import com.razorpay.Checkout;
@@ -32,6 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator;
 
 public class TrainerProfileActivity extends AppCompatActivity implements PaymentResultListener {
 
@@ -43,8 +52,8 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
 
     private CircleImageView mToolbarImageProfile;
     private TextView mToolbarUserName;
-    private TextView mProfleRating;
-    private ImageView mProfileImage;
+//    private TextView mProfleRating;
+   // private ImageView mProfileImage;
     private TextView mProfileName;
     private TextView mGender;
     private TextView mExperince;
@@ -62,11 +71,22 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
 
     private SharedPreferences prefs;
     private ProgressBar mProfile_Progressbar;
+
+    private List<TrainerPicPojo> trainerPicPojoList;
+    private ScrollingPagerIndicator mIndicator;
+    private RecyclerView mProfilePicRecycle;
+    Trainer_Pic_Adapter mTrainerPic_Adapter;
+    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trainer_profile);
         initView();
+
+
+        mProfilePicRecycle.setHasFixedSize(true);
+        mProfilePicRecycle.setLayoutManager(linearLayoutManager);
+
 
          prefs = getSharedPreferences("ProfileData", MODE_PRIVATE);
          try{
@@ -76,6 +96,16 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
          catch (Exception e){
 
          }
+        trainerPicPojoList=   getIntent().getParcelableArrayListExtra("picArray");
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(mProfilePicRecycle);
+
+        mTrainerPic_Adapter = new Trainer_Pic_Adapter(trainerPicPojoList, TrainerProfileActivity.this);
+        mProfilePicRecycle.setAdapter(mTrainerPic_Adapter);
+        mTrainerPic_Adapter.notifyDataSetChanged();
+        mIndicator.attachToRecyclerView(mProfilePicRecycle);
+
+       //  getTrainerPic();
 
         try {
              trainerName = getIntent().getStringExtra("trainerName");
@@ -98,10 +128,10 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
         try {
             mProfileAboutTrainer.setText(aboutTrainer);
             mProfileName.setText(trainerName);
-            mProfleRating.setText(rating);
+           // mProfleRating.setText(rating);
             mExperince.setText(experince);
             mToolbarUserName.setText(trainerName);
-            Picasso.get().load(picurl).into(mProfileImage);
+       //     Picasso.get().load(picurl).into(mProfileImage);
             Picasso.get().load(picurl).into(mToolbarImageProfile);
 
             mBtnBook.setText("HIRE NOW " + price + " only/-");
@@ -121,6 +151,45 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
             }
         });
 
+    }
+
+    private void getTrainerPic() {
+        mProfile_Progressbar.setVisibility(View.VISIBLE);
+        Call<List<TrainerPicPojo>> call = ApiClientInterface.getTrainerApiService().getTrainer_Pic(tokken);
+
+        call.enqueue(new Callback<List<TrainerPicPojo>>() {
+            @Override
+            public void onResponse(Call<List<TrainerPicPojo>> call, Response<List<TrainerPicPojo>> response) {
+
+                if (response.code() == 200) {
+                    mProfile_Progressbar.setVisibility(View.GONE);
+                    trainerPicPojoList = response.body();
+                    assert trainerPicPojoList != null;
+                    if (trainerPicPojoList.size() == 0) {
+
+                    }
+
+
+                } else if (response.code() == 404) {
+                    mProfile_Progressbar.setVisibility(View.GONE);
+                    Toast.makeText(TrainerProfileActivity.this, "" + response.code(), Toast.LENGTH_SHORT).show();
+                } else {
+                    mProfile_Progressbar.setVisibility(View.GONE);
+                    Toast.makeText(TrainerProfileActivity.this, "try after", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<TrainerPicPojo>> call, Throwable t) {
+                try {
+                    mProfile_Progressbar.setVisibility(View.GONE);
+                    Toast.makeText(TrainerProfileActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                }
+            }
+        });
     }
 
     private void payOnline(int rate) {
@@ -258,12 +327,15 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
         mProfile_Progressbar = findViewById(R.id.trainerProfile_Progressbar);
         mToolbarImageProfile = findViewById(R.id.toolbar_Image_profile);
         mToolbarUserName = findViewById(R.id.toolbar_User_Name);
-        mProfleRating = findViewById(R.id.profle_rating);
-        mProfileImage = findViewById(R.id.profile_image);
+      //  mProfleRating = findViewById(R.id.profle_rating);
+       // mProfileImage = findViewById(R.id.profile_image);
         mProfileName = findViewById(R.id.profile_name);
         mGender = findViewById(R.id.gender);
         mExperince = findViewById(R.id.experince);
         mBtnBook = findViewById(R.id.btnBook);
         mProfileAboutTrainer = findViewById(R.id.profile_about_trainer);
+
+        mIndicator = findViewById(R.id.profile_photo_indicator);
+        mProfilePicRecycle = findViewById(R.id.recycle_trainer_Photo);
     }
 }

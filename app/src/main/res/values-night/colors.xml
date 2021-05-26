@@ -11,9 +11,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorScreen1">#ff88a8</color>
-    <color name="colorScreen2">#1478da</color>
-    <color name="colorScreen3">#FAC117</color>
+    <color name="colorScreen1">#942FB8</color>
+    <color name="colorScreen2">#32B93B</color>
+    <color name="colorScreen3">#CC274f</color>
     <color name="textcolor">#ffffff</color>
     <color name="lighttextcolor">#DADADA</color>
     <color name="AgreeColor">#62B0FF</color>
