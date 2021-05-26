@@ -2,6 +2,7 @@ package com.example.gtrainer.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gtrainer.Activity.TrainerProfileActivity;
 import com.example.gtrainer.Api.UrlLink;
 import com.example.gtrainer.R;
+import com.example.gtrainer.model.CertificatePhotoPojo;
+import com.example.gtrainer.model.TrainerPicPojo;
 import com.example.gtrainer.model.User;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AllTrainerList_Adpter extends RecyclerView.Adapter<AllTrainerList_Adpter.AllListViewHolder> {
@@ -103,6 +107,13 @@ public class AllTrainerList_Adpter extends RecyclerView.Adapter<AllTrainerList_A
                     String trainerId ="";
 
                     User userData = data.get(getAdapterPosition());
+                    List<TrainerPicPojo> list = new ArrayList<>();
+                    list = userData.getTrainerPic();
+
+
+                    List<CertificatePhotoPojo> certiPhoto = new ArrayList<>();
+                    certiPhoto = userData.getCertificates();
+
 
                     try {
                         for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
@@ -135,6 +146,8 @@ public class AllTrainerList_Adpter extends RecyclerView.Adapter<AllTrainerList_A
                     intent.putExtra("picUrl",picurl);
                     intent.putExtra("expirence" , expirence);
                     intent.putExtra("tranierId" , trainerId);
+                    intent.putParcelableArrayListExtra("picProfileArray" , (ArrayList<? extends Parcelable>) list);
+                    intent.putParcelableArrayListExtra("picCertiArray" , (ArrayList<? extends Parcelable>) certiPhoto);
                     context.startActivity(intent);
 
 

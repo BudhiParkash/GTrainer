@@ -18,10 +18,12 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import com.example.gtrainer.Adapter.Certificate_Profile_Adapter;
 import com.example.gtrainer.Adapter.Trainer_Pic_Adapter;
 import com.example.gtrainer.Api.ApiClientInterface;
 import com.example.gtrainer.R;
 import com.example.gtrainer.model.BookingPojo;
+import com.example.gtrainer.model.CertificatePhotoPojo;
 import com.example.gtrainer.model.PayPojo;
 import com.example.gtrainer.model.TrainerPicPojo;
 import com.example.gtrainer.ui.SideMenuActivity.Apply_For_Trainer;
@@ -77,6 +79,11 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
     private RecyclerView mProfilePicRecycle;
     Trainer_Pic_Adapter mTrainerPic_Adapter;
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+
+    private List<CertificatePhotoPojo>  certificatePhotoPojoList;
+    private RecyclerView mCertiPicRecycle;
+    private Certificate_Profile_Adapter mCertiPhotoAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +94,9 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
         mProfilePicRecycle.setHasFixedSize(true);
         mProfilePicRecycle.setLayoutManager(linearLayoutManager);
 
+        mCertiPicRecycle.setHasFixedSize(true);
+        mCertiPicRecycle.setLayoutManager(new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false));
+
 
          prefs = getSharedPreferences("ProfileData", MODE_PRIVATE);
          try{
@@ -96,7 +106,7 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
          catch (Exception e){
 
          }
-        trainerPicPojoList=   getIntent().getParcelableArrayListExtra("picArray");
+        trainerPicPojoList=   getIntent().getParcelableArrayListExtra("picProfileArray");
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(mProfilePicRecycle);
 
@@ -105,7 +115,12 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
         mTrainerPic_Adapter.notifyDataSetChanged();
         mIndicator.attachToRecyclerView(mProfilePicRecycle);
 
-       //  getTrainerPic();
+
+        certificatePhotoPojoList = getIntent().getParcelableArrayListExtra("picCertiArray");
+        mCertiPhotoAdapter = new Certificate_Profile_Adapter(certificatePhotoPojoList,TrainerProfileActivity.this);
+        mCertiPicRecycle.setAdapter(mCertiPhotoAdapter);
+        mCertiPhotoAdapter.notifyDataSetChanged();
+
 
         try {
              trainerName = getIntent().getStringExtra("trainerName");
@@ -153,44 +168,6 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
 
     }
 
-    private void getTrainerPic() {
-        mProfile_Progressbar.setVisibility(View.VISIBLE);
-        Call<List<TrainerPicPojo>> call = ApiClientInterface.getTrainerApiService().getTrainer_Pic(tokken);
-
-        call.enqueue(new Callback<List<TrainerPicPojo>>() {
-            @Override
-            public void onResponse(Call<List<TrainerPicPojo>> call, Response<List<TrainerPicPojo>> response) {
-
-                if (response.code() == 200) {
-                    mProfile_Progressbar.setVisibility(View.GONE);
-                    trainerPicPojoList = response.body();
-                    assert trainerPicPojoList != null;
-                    if (trainerPicPojoList.size() == 0) {
-
-                    }
-
-
-                } else if (response.code() == 404) {
-                    mProfile_Progressbar.setVisibility(View.GONE);
-                    Toast.makeText(TrainerProfileActivity.this, "" + response.code(), Toast.LENGTH_SHORT).show();
-                } else {
-                    mProfile_Progressbar.setVisibility(View.GONE);
-                    Toast.makeText(TrainerProfileActivity.this, "try after", Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<TrainerPicPojo>> call, Throwable t) {
-                try {
-                    mProfile_Progressbar.setVisibility(View.GONE);
-                    Toast.makeText(TrainerProfileActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                }
-            }
-        });
-    }
 
     private void payOnline(int rate) {
 
@@ -337,5 +314,6 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
 
         mIndicator = findViewById(R.id.profile_photo_indicator);
         mProfilePicRecycle = findViewById(R.id.recycle_trainer_Photo);
+        mCertiPicRecycle = findViewById(R.id.recycle_certi);
     }
 }

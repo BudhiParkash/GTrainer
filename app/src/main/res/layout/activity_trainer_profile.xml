@@ -101,28 +101,6 @@
                 app:spi_dotSelectedColor="@color/colorPrimary"
                 />
 
-
-       <!--     <com.google.android.material.card.MaterialCardView
-                android:layout_width="160dp"
-                android:layout_height="280dp"
-                android:layout_gravity="center"
-                app:strokeWidth="2dp"
-                app:cardCornerRadius="5dp"
-                app:strokeColor="@color/colorPrimary">
-
-
-
-                <ImageView
-                    android:id="@+id/profile_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/johncina"
-                    android:scaleType="centerCrop"
-                    />
-
-            </com.google.android.material.card.MaterialCardView>-->
-
-
             <TextView
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
@@ -190,36 +168,21 @@ Participate in the Unacademy Combat, a weekly "/>
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Certificates :"
-                    android:textSize="22sp"
+                    android:textSize="28sp"
                     android:textColor="@color/textcolor"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="16dp"
+                    android:fontFamily="@font/squadaone_regular"
                     />
 
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:strokeWidth="1dp"
-                    android:layout_marginBottom="10dp"
-                    app:strokeColor="@color/colorPrimary"
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycle_certi"/>
 
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/certifcate"
-                        android:scaleType="centerCrop"/>
-
-
-
-
-
-                </com.google.android.material.card.MaterialCardView>
 
 
 

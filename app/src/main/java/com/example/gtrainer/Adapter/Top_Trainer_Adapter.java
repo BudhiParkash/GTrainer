@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gtrainer.Activity.TrainerProfileActivity;
 import com.example.gtrainer.Api.UrlLink;
 import com.example.gtrainer.R;
+import com.example.gtrainer.model.CertificatePhotoPojo;
 import com.example.gtrainer.model.TrainerPicPojo;
 import com.example.gtrainer.model.User;
 import com.squareup.picasso.Picasso;
@@ -99,6 +100,10 @@ public class Top_Trainer_Adapter extends RecyclerView.Adapter<Top_Trainer_Adapte
                     User userData = data.get(getAdapterPosition());
                     List<TrainerPicPojo> list = new ArrayList<>();
                     list = userData.getTrainerPic();
+
+                    List<CertificatePhotoPojo> certiPhoto = new ArrayList<>();
+                    certiPhoto = userData.getCertificates();
+
                     try {
                         for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
                             picurl = url+ userData.getTrainerPic().get(i).getPic();
@@ -130,7 +135,8 @@ public class Top_Trainer_Adapter extends RecyclerView.Adapter<Top_Trainer_Adapte
                     intent.putExtra("picUrl",picurl);
                     intent.putExtra("expirence" , expirence);
                     intent.putExtra("tranierId" , tranierId);
-                    intent.putParcelableArrayListExtra("picArray" , (ArrayList<? extends Parcelable>) list);
+                    intent.putParcelableArrayListExtra("picProfileArray" , (ArrayList<? extends Parcelable>) list);
+                    intent.putParcelableArrayListExtra("picCertiArray" , (ArrayList<? extends Parcelable>) certiPhoto);
                     context.startActivity(intent);
 
                 }
