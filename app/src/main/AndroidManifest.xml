@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GTrainer"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.BookedTrainer_DetailsActivity"></activity>
+        <activity android:name=".Activity.BookingDetailsActivity"></activity>
+        <activity android:name=".Activity.BookedTrainer_DetailsActivity" />
         <activity android:name=".ImageUpload" />
         <activity android:name=".ui.SideMenuActivity.BookingActivity" />
         <activity android:name=".ui.SideMenuActivity.TermsAndConditionActivity" />
@@ -33,8 +34,7 @@
         <activity
             android:name=".OnBoardingScreen.Login"
             android:windowSoftInputMode="stateVisible" />
-        <activity
-            android:name=".OnBoardingScreen.SplashScreen">
+        <activity android:name=".OnBoardingScreen.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.BookingDetailsActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageButton
+                android:id="@+id/bck_btn_bookingDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_arrow_back"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Booking"
+                android:textSize="20sp"
+                android:textColor="@color/textcolor"
+                android:layout_marginStart="12dp"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/bookprofilePic"
+                android:layout_marginStart="10dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/profile"
+                android:padding="5dp"
+                />
+
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/booking_t_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shivam Sharma"
+                    android:textColor="@color/textcolor"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/booking_t_Exprince"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5 Year Expirence"
+                    android:textColor="@color/textcolor"
+                    android:textSize="16sp"/>
+
+
+                <TextView
+                    android:id="@+id/booking_t_Detials"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Best Trainer in the world"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/textcolor"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book For :-"
+            android:textColor="@color/textcolor"
+            android:layout_margin="10dp"
+            android:textSize="22dp"
+            android:fontFamily="@font/squadaone_regular"
+            />
+
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleSelection="true">
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSevenDaytrial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7 Day Trial"
+                style="@style/CustomChipStyle"
+                />
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipOneMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 Month"
+                style="@style/CustomChipStyle"
+                />
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipthreeMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 Month"
+                style="@style/CustomChipStyle"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipOneYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 Year"
+                style="@style/CustomChipStyle"
+                />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offers :-"
+            android:textColor="@color/textcolor"
+            android:layout_margin="10dp"
+            android:textSize="22dp"
+            android:fontFamily="@font/squadaone_regular"
+            />
+
+        <RadioGroup
+            android:layout_marginStart="10dp"
+            android:id="@+id/radioGrpOffer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RadioButton
+                android:id="@+id/radioBtn25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textcolor"
+                android:textSize="14sp"
+                android:text="25 % off"
+                />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Valid for only 3 month plan"
+                android:textColor="@color/disablecolor"
+                android:layout_marginStart="26dp"
+                />
+            <RadioButton
+                android:id="@+id/radioBtn50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:textSize="14sp"
+                android:textColor="@color/textcolor"
+                android:text="50 % off"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Valid for only 1 Year plan"
+                android:textColor="@color/disablecolor"
+                android:layout_marginStart="26dp"
+
+                />
+            <RadioButton
+                android:id="@+id/radioBtnNoOffer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:textSize="14sp"
+                android:textColor="@color/textcolor"
+                android:text="No offer"
+                />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Final Bill"
+            android:textSize="22sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/textcolor"
+            android:fontFamily="@font/squadaone_regular"/>
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/cardview_shadow_start_color"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+
+
+        <include layout="@layout/payment_details"/>
+
+
+
+            <Button
+                android:id="@+id/btnfinalbook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundbutton"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="Book"/>
+
+
+        </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/bookingProgressBar"/>
+
+
+</RelativeLayout>

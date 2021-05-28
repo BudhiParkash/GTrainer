@@ -27,6 +27,7 @@ import retrofit2.http.Query;
 
 public class ApiClientInterface {
 
+    //192.168.29.43
     //http://192.168.1.7 brondband
     //http://192.168.73.72 PocoX2
     //http://192.168.43.72:3000/ shivaa

@@ -143,8 +143,6 @@
                 android:text="This examination season, we bring you the story of three friends who reunite to tell us all about UPSC: Pre... Mains Aur Life.
 Participate in the Unacademy Combat, a weekly "/>
 
-
-
             <Button
                 android:id="@+id/btnBook"
                 android:layout_width="match_parent"

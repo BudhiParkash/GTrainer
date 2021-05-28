@@ -1,6 +1,7 @@
 package com.example.gtrainer.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -160,8 +161,17 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
         mBtnBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProfile_Progressbar.setVisibility(View.VISIBLE);
-                payOnline(price);
+                Intent intent = new Intent(TrainerProfileActivity.this , BookingDetailsActivity.class);
+                intent.putExtra("trainerName", trainerName);
+                intent.putExtra("aboutTrainer" , aboutTrainer);
+                intent.putExtra("trainerPrice" , price);
+                intent.putExtra("trainerRating", rating);
+                intent.putExtra("picUrl",picurl);
+                intent.putExtra("expirence" , experince);
+                intent.putExtra("tranierId" , tranierId);
+                startActivity(intent);
+//                mProfile_Progressbar.setVisibility(View.VISIBLE);
+//                payOnline(price);
 
             }
         });

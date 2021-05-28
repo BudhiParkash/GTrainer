@@ -21,10 +21,12 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.example.gtrainer.Activity.All_List_Trainer;
 import com.example.gtrainer.Adapter.AddvertismentAdapter;
+import com.example.gtrainer.Adapter.AllTrainerList_Adpter;
 import com.example.gtrainer.Adapter.Top_Trainer_Adapter;
 import com.example.gtrainer.Api.ApiClientInterface;
 import com.example.gtrainer.model.Ads_Pojo;
 import com.example.gtrainer.model.PopularPojo;
+import com.example.gtrainer.model.TrainerListPojo;
 import com.example.gtrainer.model.User;
 import com.example.gtrainer.ui.SideMenuActivity.Apply_For_Trainer;
 import com.example.gtrainer.ui.SideMenuActivity.BookingActivity;
@@ -88,6 +90,11 @@ public class MainActivity extends AppCompatActivity {
     String  tokken;
     private Top_Trainer_Adapter top_trainer_adapter;
 
+
+    private RecyclerView mNewTrainerRecycle;
+    private List<User> newtrainerList = new ArrayList<User>();
+    private  AllTrainerList_Adpter mAllTrainer_Adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,8 +109,12 @@ public class MainActivity extends AppCompatActivity {
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(mRecycleAdds);
 
+        mNewTrainerRecycle.setHasFixedSize(true);
+        mNewTrainerRecycle.setLayoutManager(new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false));
+
         Call_Ads_Data();
         getTopTrainers();
+        getNewTrainers();
 
         mViewAllTrainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,14 +184,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
-
     }
 
     private void getTopTrainers() {
@@ -218,6 +221,39 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void getNewTrainers() {
+        mAddProgress.setVisibility(View.VISIBLE);
+        Call<TrainerListPojo> call  = ApiClientInterface.getTrainerApiService().getAllTrainer(tokken , 1 ,10);
+        call.enqueue(new Callback<TrainerListPojo>() {
+            @Override
+            public void onResponse(Call<TrainerListPojo> call, Response<TrainerListPojo> response) {
+                if(response.code() == 200){
+                    mAddProgress.setVisibility(View.GONE);
+                    assert response.body() != null;
+
+                    TrainerListPojo trainerListPojo = response.body();
+                    newtrainerList.addAll(trainerListPojo.getSearchResult());
+
+
+                    mAllTrainer_Adapter  = new AllTrainerList_Adpter(newtrainerList , MainActivity.this);
+                    mNewTrainerRecycle.setAdapter(mAllTrainer_Adapter);
+                    mAllTrainer_Adapter.notifyDataSetChanged();
+                }
+                else {
+                    mAddProgress.setVisibility(View.GONE);
+                    Toast.makeText(MainActivity.this, "try after sometime"+response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TrainerListPojo> call, Throwable t) {
+                mAddProgress.setVisibility(View.GONE);
+                Toast.makeText(MainActivity.this, "try after sometime"+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 
@@ -282,6 +318,8 @@ public class MainActivity extends AppCompatActivity {
         mAddProgress = findViewById(R.id.ad_progressBar);
         mApplyforTrainer = findViewById(R.id.applyfortrainer_Layout);
         popularRecycle  = findViewById(R.id.toptrainerRecycle);
+
+        mNewTrainerRecycle = findViewById(R.id.newTrainerRecycle);
 
 
         mBookingLayout = findViewById(R.id.booking_layout);
