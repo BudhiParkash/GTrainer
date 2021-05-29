@@ -2,11 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-         <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
+        android:layout_width="130dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:id="@+id/profile"/>
+
+    </androidx.cardview.widget.CardView>
+
+<!--         <com.google.android.material.card.MaterialCardView
              android:layout_centerInParent="true"
              android:layout_width="160dp"
              android:layout_height="180dp"
@@ -26,12 +40,7 @@
              android:scaleType="centerCrop"
              />
 
-     </com.google.android.material.card.MaterialCardView>
+     </com.google.android.material.card.MaterialCardView>-->
 
-<!--    <ImageView
-        android:src="@drawable/profile"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:id="@+id/certiPicdemo"/>-->
 
 </RelativeLayout>

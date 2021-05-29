@@ -25,7 +25,6 @@ import com.example.gtrainer.Adapter.AllTrainerList_Adpter;
 import com.example.gtrainer.Adapter.Top_Trainer_Adapter;
 import com.example.gtrainer.Api.ApiClientInterface;
 import com.example.gtrainer.model.Ads_Pojo;
-import com.example.gtrainer.model.PopularPojo;
 import com.example.gtrainer.model.TrainerListPojo;
 import com.example.gtrainer.model.User;
 import com.example.gtrainer.ui.SideMenuActivity.Apply_For_Trainer;
@@ -87,13 +86,16 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout mTermConditionL;
 
     SharedPreferences prefs;
-    String  tokken;
+    String tokken;
     private Top_Trainer_Adapter top_trainer_adapter;
 
 
     private RecyclerView mNewTrainerRecycle;
     private List<User> newtrainerList = new ArrayList<User>();
-    private  AllTrainerList_Adpter mAllTrainer_Adapter;
+    private AllTrainerList_Adpter mAllTrainer_Adapter;
+
+    private String userName;
+    private TextView mHomeUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +103,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         prefs = getSharedPreferences("ProfileData", MODE_PRIVATE);
-        tokken = prefs.getString("tokken","no tokkens");
+
+        try {
+            tokken = prefs.getString("tokken", "no tokkens");
+            userName =prefs.getString("name" , "Your Name");
+        }
+        catch (Exception e){
+
+        }
+
         mAddProgress.setVisibility(View.VISIBLE);
+        mHomeUserName.setText(userName);
 
         mRecycleAdds.setHasFixedSize(true);
         mRecycleAdds.setLayoutManager(linearLayoutManager);
@@ -110,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         snapHelper.attachToRecyclerView(mRecycleAdds);
 
         mNewTrainerRecycle.setHasFixedSize(true);
-        mNewTrainerRecycle.setLayoutManager(new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false));
+        mNewTrainerRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         Call_Ads_Data();
         getTopTrainers();
@@ -170,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         mMenuHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,20 +197,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getTopTrainers() {
-        Call<List<User>> call  = ApiClientInterface.getTrainerApiService().getTopTrainer(tokken);
+        Call<List<User>> call = ApiClientInterface.getTrainerApiService().getTopTrainer(tokken);
         mAddProgress.setVisibility(View.VISIBLE);
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                if(response.code() == 200){
+                if (response.code() == 200) {
                     mAddProgress.setVisibility(View.GONE);
                     userList = response.body();
                     assert userList != null;
-                    if(userList.size() == 0){
+                    if (userList.size() == 0) {
 
                     }
 
-                    top_trainer_adapter  = new Top_Trainer_Adapter(userList , MainActivity.this);
+                    top_trainer_adapter = new Top_Trainer_Adapter(userList, MainActivity.this);
                     popularRecycle.setAdapter(top_trainer_adapter);
                     top_trainer_adapter.notifyDataSetChanged();
 
@@ -208,28 +218,27 @@ public class MainActivity extends AppCompatActivity {
                     popularRecycle.setItemTransformer(new ScaleTransformer.Builder()
                             .setMinScale(0.7f)
                             .build());
-                }
-                else {
+                } else {
                     mAddProgress.setVisibility(View.GONE);
-                    Toast.makeText(MainActivity.this, ""+response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "" + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
                 mAddProgress.setVisibility(View.GONE);
-                Toast.makeText(MainActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void getNewTrainers() {
         mAddProgress.setVisibility(View.VISIBLE);
-        Call<TrainerListPojo> call  = ApiClientInterface.getTrainerApiService().getAllTrainer(tokken , 1 ,10);
+        Call<TrainerListPojo> call = ApiClientInterface.getTrainerApiService().getAllTrainer(tokken, 1, 10);
         call.enqueue(new Callback<TrainerListPojo>() {
             @Override
             public void onResponse(Call<TrainerListPojo> call, Response<TrainerListPojo> response) {
-                if(response.code() == 200){
+                if (response.code() == 200) {
                     mAddProgress.setVisibility(View.GONE);
                     assert response.body() != null;
 
@@ -237,20 +246,19 @@ public class MainActivity extends AppCompatActivity {
                     newtrainerList.addAll(trainerListPojo.getSearchResult());
 
 
-                    mAllTrainer_Adapter  = new AllTrainerList_Adpter(newtrainerList , MainActivity.this);
+                    mAllTrainer_Adapter = new AllTrainerList_Adpter(newtrainerList, MainActivity.this);
                     mNewTrainerRecycle.setAdapter(mAllTrainer_Adapter);
                     mAllTrainer_Adapter.notifyDataSetChanged();
-                }
-                else {
+                } else {
                     mAddProgress.setVisibility(View.GONE);
-                    Toast.makeText(MainActivity.this, "try after sometime"+response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "try after sometime" + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<TrainerListPojo> call, Throwable t) {
                 mAddProgress.setVisibility(View.GONE);
-                Toast.makeText(MainActivity.this, "try after sometime"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "try after sometime" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -317,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
         mViewAllTrainer = findViewById(R.id.btnViewAllTrainer);
         mAddProgress = findViewById(R.id.ad_progressBar);
         mApplyforTrainer = findViewById(R.id.applyfortrainer_Layout);
-        popularRecycle  = findViewById(R.id.toptrainerRecycle);
+        popularRecycle = findViewById(R.id.toptrainerRecycle);
 
         mNewTrainerRecycle = findViewById(R.id.newTrainerRecycle);
 
@@ -326,5 +334,6 @@ public class MainActivity extends AppCompatActivity {
         mHelpLayout = findViewById(R.id.help_layout);
         mPrivacyLayout = findViewById(R.id.privacy_layout);
         mTermConditionL = findViewById(R.id.term_conditionL);
+        mHomeUserName = findViewById(R.id.home_userName);
     }
 }

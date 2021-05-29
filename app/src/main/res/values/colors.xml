@@ -22,6 +22,7 @@
 
     <color name="iconcolor">#1093F5</color>
     <color name="disablecolor">#D3D1D1</color>
+    <color name="transparent">#00000000</color>
 
 
 

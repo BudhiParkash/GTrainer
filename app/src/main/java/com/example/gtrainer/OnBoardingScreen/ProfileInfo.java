@@ -57,11 +57,15 @@ public class ProfileInfo extends AppCompatActivity {
         editor.apply();
         try {
             onlyNumber = getIntent().getStringExtra("num");
+
         }
         catch (Exception e){
 
         }
         createUser();
+
+        mTxtphonenumber.setText(onlyNumber);
+
 
         mTxtNextProfileInfo.setOnClickListener(new View.OnClickListener() {
             @Override

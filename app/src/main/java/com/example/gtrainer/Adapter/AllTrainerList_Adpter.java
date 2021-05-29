@@ -47,22 +47,23 @@ public class AllTrainerList_Adpter extends RecyclerView.Adapter<AllTrainerList_A
     @Override
     public void onBindViewHolder(AllListViewHolder holder, int position) {
 
-        User userData = data.get(position);
+        User Data = data.get(position);
 
+        holder.mAboutTrainer.setText(Data.getAboutUser());
+        holder.mTrainerName.setText(Data.getUser_name());
+        holder.mTrainerPrice.setText(Data.getPrice()+" only/-");
         try {
-            for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
-                String picurl = url+ userData.getTrainerPic().get(i).getPic();
+            for (int i= 0 ; i< Data.getTrainerPic().size(); i++ ){
+                String picurl = url+ Data.getTrainerPic().get(i).getPic();
                 Picasso.get().load(picurl).into(holder.mTrainerImage);
             }
 
-            for (int i= 0 ; i< userData.getRatings().size(); i++ ){
-                String rating = userData.getRatings().get(i).getRating();
+            for (int i= 0 ; i< Data.getRatings().size(); i++ ){
+                String rating = Data.getRatings().get(i).getRating();
                 holder.mTrainerRating.setText(rating);
             }
 
-            holder.mAboutTrainer.setText(userData.getAboutUser());
-            holder.mTrainerName.setText(userData.getUser_name());
-            holder.mTrainerPrice.setText(userData.getPrice()+" only/-");
+
 
         }
         catch (Exception e){
@@ -97,23 +98,21 @@ public class AllTrainerList_Adpter extends RecyclerView.Adapter<AllTrainerList_A
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     String picurl ="";
                     String rating ="";
-                    String trainerName="";
+                    String trainerName ="";
                     String aboutTrainer="";
-                    int trainerPrice=0;
-                    String expirence="";
-                    String trainerId ="";
+                    int trainerPrice =0;
+                    String expirence ="";
+                    String tranierId ="";
+                    String gender="";
 
                     User userData = data.get(getAdapterPosition());
                     List<TrainerPicPojo> list = new ArrayList<>();
                     list = userData.getTrainerPic();
 
-
                     List<CertificatePhotoPojo> certiPhoto = new ArrayList<>();
                     certiPhoto = userData.getCertificates();
-
 
                     try {
                         for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
@@ -121,23 +120,24 @@ public class AllTrainerList_Adpter extends RecyclerView.Adapter<AllTrainerList_A
 
                         }
 
-                        for (int i= 0 ; i< userData.getTrainerPic().size(); i++ ){
+                        for (int i= 0 ; i< userData.getRatings().size(); i++ ){
                             rating = userData.getRatings().get(i).getRating();
+
                         }
                         trainerName = userData.getUser_name();
                         aboutTrainer = userData.getAboutUser();
                         trainerPrice = userData.getPrice();
                         expirence = userData.getExperiance();
-                        trainerId = userData.getId();
+                        tranierId = userData.getId();
+                        gender = userData.getGender();
+
+
+
                     }
+
                     catch (Exception e){
 
                     }
-
-
-
-
-
                     Intent intent = new Intent(context, TrainerProfileActivity.class);
                     intent.putExtra("trainerName", trainerName);
                     intent.putExtra("aboutTrainer" , aboutTrainer);
@@ -145,7 +145,8 @@ public class AllTrainerList_Adpter extends RecyclerView.Adapter<AllTrainerList_A
                     intent.putExtra("trainerRating", rating);
                     intent.putExtra("picUrl",picurl);
                     intent.putExtra("expirence" , expirence);
-                    intent.putExtra("tranierId" , trainerId);
+                    intent.putExtra("tranierId" , tranierId);
+                    intent.putExtra("gender" , gender);
                     intent.putParcelableArrayListExtra("picProfileArray" , (ArrayList<? extends Parcelable>) list);
                     intent.putParcelableArrayListExtra("picCertiArray" , (ArrayList<? extends Parcelable>) certiPhoto);
                     context.startActivity(intent);

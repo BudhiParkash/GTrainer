@@ -1,62 +1,45 @@
 package com.example.gtrainer.Activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 
 import com.example.gtrainer.Adapter.Certificate_Profile_Adapter;
 import com.example.gtrainer.Adapter.Trainer_Pic_Adapter;
-import com.example.gtrainer.Api.ApiClientInterface;
 import com.example.gtrainer.R;
-import com.example.gtrainer.model.BookingPojo;
 import com.example.gtrainer.model.CertificatePhotoPojo;
 import com.example.gtrainer.model.PayPojo;
 import com.example.gtrainer.model.TrainerPicPojo;
-import com.example.gtrainer.ui.SideMenuActivity.Apply_For_Trainer;
-import com.example.gtrainer.ui.SideMenuActivity.BookingActivity;
-import com.google.gson.JsonObject;
-import com.razorpay.Checkout;
-import com.razorpay.PaymentResultListener;
+import com.ramotion.cardslider.CardSliderLayoutManager;
+import com.ramotion.cardslider.CardSnapHelper;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator;
 
-public class TrainerProfileActivity extends AppCompatActivity implements PaymentResultListener {
+public class TrainerProfileActivity extends AppCompatActivity {
 
 
-    String key,orderId;
+    String key, orderId;
     int finalPays;
     private static final String TAG = "Find";
     List<PayPojo> pp = new ArrayList<>();
 
     private CircleImageView mToolbarImageProfile;
     private TextView mToolbarUserName;
-//    private TextView mProfleRating;
-   // private ImageView mProfileImage;
     private TextView mProfileName;
     private TextView mGender;
     private TextView mExperince;
@@ -69,22 +52,25 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
     private String rating;
     private String picurl;
     private String experince;
-    private  String tranierId;
-    private String  tokken , userId;
+    private String tranierId;
+    private String gender;
+    private String tokken, userId;
 
     private SharedPreferences prefs;
     private ProgressBar mProfile_Progressbar;
 
     private List<TrainerPicPojo> trainerPicPojoList;
-    private ScrollingPagerIndicator mIndicator;
+    //   private ScrollingPagerIndicator mIndicator;
     private RecyclerView mProfilePicRecycle;
-    Trainer_Pic_Adapter mTrainerPic_Adapter;
+    private Trainer_Pic_Adapter mTrainerPic_Adapter;
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
 
-    private List<CertificatePhotoPojo>  certificatePhotoPojoList;
+    private List<CertificatePhotoPojo> certificatePhotoPojoList;
     private RecyclerView mCertiPicRecycle;
     private Certificate_Profile_Adapter mCertiPhotoAdapter;
+    private ImageButton mBckBtnTrainerProfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,218 +79,84 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
 
 
         mProfilePicRecycle.setHasFixedSize(true);
-        mProfilePicRecycle.setLayoutManager(linearLayoutManager);
+        mProfilePicRecycle.setLayoutManager(new CardSliderLayoutManager(Objects.requireNonNull(TrainerProfileActivity.this)));
+        new CardSnapHelper().attachToRecyclerView(mProfilePicRecycle);
 
         mCertiPicRecycle.setHasFixedSize(true);
-        mCertiPicRecycle.setLayoutManager(new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false));
+        mCertiPicRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
 
-         prefs = getSharedPreferences("ProfileData", MODE_PRIVATE);
-         try{
-             tokken = prefs.getString("tokken","no tokkens");
-             userId = prefs.getString("userId" , "xx");
-         }
-         catch (Exception e){
+        prefs = getSharedPreferences("ProfileData", MODE_PRIVATE);
+        try {
+            tokken = prefs.getString("tokken", "no tokkens");
+            userId = prefs.getString("userId", "xx");
+        } catch (Exception e) {
 
-         }
-        trainerPicPojoList=   getIntent().getParcelableArrayListExtra("picProfileArray");
-        SnapHelper snapHelper = new PagerSnapHelper();
-        snapHelper.attachToRecyclerView(mProfilePicRecycle);
+        }
+        try {
+            trainerName = getIntent().getStringExtra("trainerName");
+            aboutTrainer = getIntent().getStringExtra("aboutTrainer");
+            price = getIntent().getIntExtra("trainerPrice", 0);
+            rating = getIntent().getStringExtra("trainerRating");
+            picurl = getIntent().getStringExtra("picUrl");
+            experince = getIntent().getStringExtra("expirence");
+            tranierId = getIntent().getStringExtra("tranierId");
+            gender = getIntent().getStringExtra("gender");
+            trainerPicPojoList = getIntent().getParcelableArrayListExtra("picProfileArray");
+        } catch (Exception e) {
+            Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
 
         mTrainerPic_Adapter = new Trainer_Pic_Adapter(trainerPicPojoList, TrainerProfileActivity.this);
         mProfilePicRecycle.setAdapter(mTrainerPic_Adapter);
         mTrainerPic_Adapter.notifyDataSetChanged();
-        mIndicator.attachToRecyclerView(mProfilePicRecycle);
 
 
         certificatePhotoPojoList = getIntent().getParcelableArrayListExtra("picCertiArray");
-        mCertiPhotoAdapter = new Certificate_Profile_Adapter(certificatePhotoPojoList,TrainerProfileActivity.this);
+        mCertiPhotoAdapter = new Certificate_Profile_Adapter(certificatePhotoPojoList, TrainerProfileActivity.this);
         mCertiPicRecycle.setAdapter(mCertiPhotoAdapter);
         mCertiPhotoAdapter.notifyDataSetChanged();
 
 
         try {
-             trainerName = getIntent().getStringExtra("trainerName");
-             aboutTrainer = getIntent().getStringExtra("aboutTrainer");
-             price = getIntent().getIntExtra("trainerPrice", 0);
-             rating = getIntent().getStringExtra("trainerRating");
-             picurl = getIntent().getStringExtra("picUrl");
-             experince = getIntent().getStringExtra("expirence");
-             tranierId = getIntent().getStringExtra("tranierId");
-        }
-        catch (Exception e){
-            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-
-
-
-
-
-        try {
             mProfileAboutTrainer.setText(aboutTrainer);
             mProfileName.setText(trainerName);
-           // mProfleRating.setText(rating);
+            // mProfleRating.setText(rating);
             mExperince.setText(experince);
+            mGender.setText(gender);
             mToolbarUserName.setText(trainerName);
-       //     Picasso.get().load(picurl).into(mProfileImage);
+            mBtnBook.setText("HIRE NOW " + price + " only/-");
+            //     Picasso.get().load(picurl).into(mProfileImage);
             Picasso.get().load(picurl).into(mToolbarImageProfile);
 
-            mBtnBook.setText("HIRE NOW " + price + " only/-");
-        }
-        catch (Exception e){
+
+        } catch (Exception e) {
 
         }
 
+
+        mBckBtnTrainerProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
         mBtnBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrainerProfileActivity.this , BookingDetailsActivity.class);
+                Intent intent = new Intent(TrainerProfileActivity.this, BookingDetailsActivity.class);
                 intent.putExtra("trainerName", trainerName);
-                intent.putExtra("aboutTrainer" , aboutTrainer);
-                intent.putExtra("trainerPrice" , price);
+                intent.putExtra("aboutTrainer", aboutTrainer);
+                intent.putExtra("trainerPrice", price);
                 intent.putExtra("trainerRating", rating);
-                intent.putExtra("picUrl",picurl);
-                intent.putExtra("expirence" , experince);
-                intent.putExtra("tranierId" , tranierId);
+                intent.putExtra("picUrl", picurl);
+                intent.putExtra("expirence", experince);
+                intent.putExtra("tranierId", tranierId);
                 startActivity(intent);
-//                mProfile_Progressbar.setVisibility(View.VISIBLE);
-//                payOnline(price);
 
-            }
-        });
-
-    }
-
-
-    private void payOnline(int rate) {
-
-        rate = rate*100;
-        JsonObject amout = new JsonObject();
-        amout.addProperty("amount", rate);
-        Call<List<PayPojo>> call = ApiClientInterface.getTrainerApiService().getOrderId(tokken,amout);
-
-        call.enqueue(new Callback<List<PayPojo>>() {
-            @Override
-            public void onResponse(Call<List<PayPojo>> call, Response<List<PayPojo>> response) {
-                if(response.code() == 201){
-                    mProfile_Progressbar.setVisibility(View.GONE);
-                    pp = response.body();
-                    assert pp != null;
-                    key = pp.get(1).getKeyId();
-                    orderId = pp.get(0).getOrder().getId();
-                    finalPays = pp.get(0).getOrder().getAmountDue();
-                    startPayment();
-
-                }else {
-                    mProfile_Progressbar.setVisibility(View.GONE);
-                    Toast.makeText(TrainerProfileActivity.this, "Please Check Details Again" + response.code(), Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<List<PayPojo>> call, Throwable t) {
-                mProfile_Progressbar.setVisibility(View.GONE);
-                Toast.makeText(TrainerProfileActivity.this, "Please Check your internet", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-    }
-
-    private void startPayment() {
-        /**
-         * Instantiate Checkout
-         */
-
-
-        Checkout checkout = new Checkout();
-        checkout.setKeyID(key);
-        /**
-         * Set your logo here
-         */
-        checkout.setImage(R.drawable.rzp_logo);
-
-        /**
-         * Reference to current activity
-         */
-        final Activity activity = this;
-
-        /**
-         * Pass your payment options to the Razorpay Checkout as a JSONObject
-         */
-        try {
-            JSONObject options = new JSONObject();
-
-            /**
-             * Merchant Name
-             * eg: ACME Corp || HasGeek etc.
-             */
-            options.put("name", "Charak");
-
-            /**
-             * Description can be anything
-             * eg: Reference No. #123123 - This order number is passed by you for your internal reference. This is not the `razorpay_order_id`.
-             *     Invoice Payment
-             *     etc.
-             */
-            options.put("description", "Receipt for User");
-            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
-            options.put("order_id", orderId);
-            options.put("currency", "INR");
-
-
-            /**
-             * Amount is always passed in currency subunits
-             * Eg: "500" = INR 5.00
-             */
-            String finalPay = String.valueOf(finalPays);
-            options.put("amount", finalPay);
-
-            checkout.open(activity, options);
-        } catch(Exception e) {
-            Toast.makeText(activity, "Try Again Later!", Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "Error in starting Razorpay Checkout", e);
-        }
-    }
-
-    @Override
-    public void onPaymentSuccess(String s) {
-        Toast.makeText(this, "Payment Success", Toast.LENGTH_SHORT).show();
-        doBooking();
-
-    }
-
-    @Override
-    public void onPaymentError(int i, String s) {
-
-    }
-
-    private void doBooking() {
-        mProfile_Progressbar.setVisibility(View.VISIBLE);
-        BookingPojo bookingData = new BookingPojo(userId ,tranierId , price , "two months" , "21/7/2021"  );
-
-        Call<BookingPojo> call = ApiClientInterface.getTrainerApiService().postBooking(tokken , bookingData);
-        call.enqueue(new Callback<BookingPojo>() {
-            @Override
-            public void onResponse(Call<BookingPojo> call, Response<BookingPojo> response) {
-                if(response.code() == 201){
-                    mProfile_Progressbar.setVisibility(View.GONE);
-                    Toast.makeText(TrainerProfileActivity.this, "Done Booking", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    mProfile_Progressbar.setVisibility(View.GONE);
-                    Toast.makeText(TrainerProfileActivity.this, "Some Error in Booking" + response.code(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BookingPojo> call, Throwable t) {
-                mProfile_Progressbar.setVisibility(View.GONE);
-                Toast.makeText(TrainerProfileActivity.this, "try after sometimes" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -314,16 +166,20 @@ public class TrainerProfileActivity extends AppCompatActivity implements Payment
         mProfile_Progressbar = findViewById(R.id.trainerProfile_Progressbar);
         mToolbarImageProfile = findViewById(R.id.toolbar_Image_profile);
         mToolbarUserName = findViewById(R.id.toolbar_User_Name);
-      //  mProfleRating = findViewById(R.id.profle_rating);
-       // mProfileImage = findViewById(R.id.profile_image);
+        //  mProfleRating = findViewById(R.id.profle_rating);
+        // mProfileImage = findViewById(R.id.profile_image);
         mProfileName = findViewById(R.id.profile_name);
         mGender = findViewById(R.id.gender);
         mExperince = findViewById(R.id.experince);
         mBtnBook = findViewById(R.id.btnBook);
         mProfileAboutTrainer = findViewById(R.id.profile_about_trainer);
-
-        mIndicator = findViewById(R.id.profile_photo_indicator);
         mProfilePicRecycle = findViewById(R.id.recycle_trainer_Photo);
         mCertiPicRecycle = findViewById(R.id.recycle_certi);
+        mBckBtnTrainerProfile = findViewById(R.id.bck_btn_trainerProfile);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

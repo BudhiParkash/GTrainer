@@ -20,7 +20,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/bck_btn_Convestion"
+                android:id="@+id/bck_btn_trainerProfile"
                 android:layout_width="16pt"
                 android:layout_height="18pt"
                 android:background="@android:color/transparent"
@@ -81,67 +81,112 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycle_trainer_Photo"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trainer Photo"
+                    android:textSize="20sp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/textcolor"
+                    android:fontFamily="@font/squadaone_regular"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/recycle_trainer_Photo"
+                    android:clipChildren="false"
+                    android:overScrollMode="never"
+                    app:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
+                    />
+            </LinearLayout>
 
 
 
-            <ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:layout_gravity="center"
-                android:id="@+id/profile_photo_indicator"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:spi_dotSize="10dp"
-                app:spi_dotSelectedSize="12dp"
-                app:spi_dotColor="@color/grey"
-                app:spi_dotSelectedColor="@color/colorPrimary"
+                android:text="Personal Details"
+                android:textSize="20sp"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/textcolor"
+                android:fontFamily="@font/squadaone_regular"
                 />
 
-            <TextView
-                android:id="@+id/profile_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textcolor"
-                android:textSize="22sp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="John Cina"/>
 
-            <TextView
-                android:id="@+id/gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textcolor"
-                android:textSize="18sp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Male"/>
+   <androidx.cardview.widget.CardView
+       android:layout_margin="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:elevation="0dp"
+       android:backgroundTint="@android:color/transparent">
 
-            <TextView
-                android:id="@+id/experince"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textcolor"
-                android:textSize="18sp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="2 year Experince"/>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+
+           <TextView
+               android:id="@+id/profile_name"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="@color/textcolor"
+               android:textSize="22sp"
+               android:fontFamily="@font/sansita_regular"
+               android:layout_gravity="center"
+               android:layout_marginTop="10dp"
+               android:text="John Cina"/>
+
+           <TextView
+               android:id="@+id/gender"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="@color/textcolor"
+               android:textSize="18sp"
+               android:fontFamily="@font/sansita_regular"
+               android:layout_gravity="center"
+               android:layout_marginTop="10dp"
+               android:text="Male"/>
+
+           <TextView
+               android:id="@+id/experince"
+               android:fontFamily="@font/sansita_regular"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="@color/textcolor"
+               android:textSize="18sp"
+               android:layout_gravity="center"
+               android:layout_marginTop="10dp"
+               android:text="2 year Experince"/>
 
 
-            <TextView
-                android:id="@+id/profile_about_trainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textcolor"
-                android:textSize="16sp"
-                android:textAlignment="center"
-                android:layout_margin="12dp"
-                android:text="This examination season, we bring you the story of three friends who reunite to tell us all about UPSC: Pre... Mains Aur Life.
+           <TextView
+               android:id="@+id/profile_about_trainer"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="@color/textcolor"
+               android:textSize="16sp"
+               android:textAlignment="center"
+               android:layout_margin="12dp"
+               android:fontFamily="@font/courgette_regular"
+               android:text="This examination season, we bring you the story of three friends who reunite to tell us all about UPSC: Pre... Mains Aur Life.
 Participate in the Unacademy Combat, a weekly "/>
+
+
+       </LinearLayout>
+
+
+   </androidx.cardview.widget.CardView>
+
+
 
             <Button
                 android:id="@+id/btnBook"
@@ -149,8 +194,9 @@ Participate in the Unacademy Combat, a weekly "/>
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/textcolor"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:textColor="@color/white"
                 android:background="@drawable/roundbutton"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Hire Now only 999 Rs"/>
@@ -166,7 +212,7 @@ Participate in the Unacademy Combat, a weekly "/>
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Certificates :"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     android:textColor="@color/textcolor"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="16dp"

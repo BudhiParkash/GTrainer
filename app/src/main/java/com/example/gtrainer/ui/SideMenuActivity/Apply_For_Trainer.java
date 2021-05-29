@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gtrainer.Activity.Apply_For_Trainer_2;
+import com.example.gtrainer.Activity.TrainerProfileActivity;
 import com.example.gtrainer.Adapter.Certificate_Pic_Adapter;
 import com.example.gtrainer.Adapter.Trainer_Pic_Adapter;
 import com.example.gtrainer.Api.ApiClientInterface;
@@ -33,9 +34,12 @@ import com.example.gtrainer.model.CertificatePhotoPojo;
 import com.example.gtrainer.model.TrainerPicPojo;
 import com.example.gtrainer.model.User;
 import com.google.android.material.textfield.TextInputLayout;
+import com.ramotion.cardslider.CardSliderLayoutManager;
+import com.ramotion.cardslider.CardSnapHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,12 +92,12 @@ public class Apply_For_Trainer extends AppCompatActivity {
         mDetails_1_Progressbar.setVisibility(View.VISIBLE);
 
         certi_picList = new ArrayList<>();
-        mCerti_Recycle.setHasFixedSize(true);
-        mCerti_Recycle.setLayoutManager(new LinearLayoutManager(Apply_For_Trainer.this, LinearLayoutManager.HORIZONTAL, false));
+        mCerti_Recycle.setLayoutManager(new CardSliderLayoutManager(Objects.requireNonNull(Apply_For_Trainer.this)));
+        new CardSnapHelper().attachToRecyclerView(mCerti_Recycle);
 
         trainerPicPojoList = new ArrayList<>();
-        mTrainer_Pic_Recycle.setHasFixedSize(true);
-        mTrainer_Pic_Recycle.setLayoutManager(new LinearLayoutManager(Apply_For_Trainer.this, LinearLayoutManager.HORIZONTAL, false));
+        mTrainer_Pic_Recycle.setLayoutManager(new CardSliderLayoutManager(Objects.requireNonNull(Apply_For_Trainer.this)));
+        new CardSnapHelper().attachToRecyclerView(mTrainer_Pic_Recycle);
 
 
 
@@ -105,6 +109,13 @@ public class Apply_For_Trainer extends AppCompatActivity {
         // getSlipPic();
 
         //  getTrainerPic();
+
+        mBckBtnApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
         mAttachedCertificae.setOnClickListener(new View.OnClickListener() {
@@ -356,6 +367,11 @@ public class Apply_For_Trainer extends AppCompatActivity {
         mRadioM = findViewById(R.id.radioM);
         mRadioF = findViewById(R.id.radioF);
         mbtnNext = findViewById(R.id.applybtn);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override

@@ -84,8 +84,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Shivam Sharma"
+                    android:fontFamily="@font/sansita_regular"
                     android:textColor="@color/textcolor"
-                    android:textSize="18sp"/>
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:id="@+id/booking_t_Exprince"
@@ -93,6 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5 Year Expirence"
+                    android:fontFamily="@font/sansita_regular"
                     android:textColor="@color/textcolor"
                     android:textSize="16sp"/>
 
@@ -103,6 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Best Trainer in the world"
+                    android:fontFamily="@font/sansita_regular"
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:textColor="@color/textcolor"

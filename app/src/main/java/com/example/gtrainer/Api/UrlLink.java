@@ -2,5 +2,5 @@ package com.example.gtrainer.Api;
 
 public class UrlLink {
 
-    public String url = "http://192.168.1.6:3000/";
+    public String url = "https://gtrainer.herokuapp.com/";
 }

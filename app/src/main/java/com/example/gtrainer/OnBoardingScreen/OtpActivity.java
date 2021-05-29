@@ -72,11 +72,6 @@ public class OtpActivity extends AppCompatActivity  {
     String onlyNumber;
     String verificationId;
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,9 +83,7 @@ public class OtpActivity extends AppCompatActivity  {
 
         myAuth = FirebaseAuth.getInstance();
         
-
-
-
+        
         userNumer = getIntent().getStringExtra("number");
         onlyNumber = getIntent().getStringExtra("onlyNumber");
 

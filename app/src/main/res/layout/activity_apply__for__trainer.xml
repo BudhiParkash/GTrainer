@@ -183,10 +183,14 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="gone"
-            android:elevation="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
             android:id="@+id/certificate_Reycle"
+            android:clipChildren="false"
+            android:overScrollMode="never"
+            app:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
             />
 
         <TextView
@@ -204,11 +208,15 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:visibility="gone"
-            android:elevation="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
             android:id="@+id/trainerPic_Reycle"
+            android:clipChildren="false"
+            android:overScrollMode="never"
+            android:visibility="gone"
+            app:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
             />
 
 

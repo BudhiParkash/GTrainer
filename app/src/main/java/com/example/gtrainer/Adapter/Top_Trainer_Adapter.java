@@ -96,6 +96,7 @@ public class Top_Trainer_Adapter extends RecyclerView.Adapter<Top_Trainer_Adapte
                     int trainerPrice =0;
                     String expirence ="";
                     String tranierId ="";
+                    String gender="";
 
                     User userData = data.get(getAdapterPosition());
                     List<TrainerPicPojo> list = new ArrayList<>();
@@ -119,6 +120,7 @@ public class Top_Trainer_Adapter extends RecyclerView.Adapter<Top_Trainer_Adapte
                         trainerPrice = userData.getPrice();
                         expirence = userData.getExperiance();
                         tranierId = userData.getId();
+                        gender = userData.getGender();
 
 
 
@@ -135,6 +137,7 @@ public class Top_Trainer_Adapter extends RecyclerView.Adapter<Top_Trainer_Adapte
                     intent.putExtra("picUrl",picurl);
                     intent.putExtra("expirence" , expirence);
                     intent.putExtra("tranierId" , tranierId);
+                    intent.putExtra("gender" , gender);
                     intent.putParcelableArrayListExtra("picProfileArray" , (ArrayList<? extends Parcelable>) list);
                     intent.putParcelableArrayListExtra("picCertiArray" , (ArrayList<? extends Parcelable>) certiPhoto);
                     context.startActivity(intent);
