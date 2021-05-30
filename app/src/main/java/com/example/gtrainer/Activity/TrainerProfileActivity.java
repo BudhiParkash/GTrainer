@@ -33,11 +33,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class TrainerProfileActivity extends AppCompatActivity {
 
 
-    String key, orderId;
-    int finalPays;
-    private static final String TAG = "Find";
-    List<PayPojo> pp = new ArrayList<>();
-
     private CircleImageView mToolbarImageProfile;
     private TextView mToolbarUserName;
     private TextView mProfileName;
@@ -60,16 +55,17 @@ public class TrainerProfileActivity extends AppCompatActivity {
     private ProgressBar mProfile_Progressbar;
 
     private List<TrainerPicPojo> trainerPicPojoList;
-    //   private ScrollingPagerIndicator mIndicator;
+
     private RecyclerView mProfilePicRecycle;
     private Trainer_Pic_Adapter mTrainerPic_Adapter;
-    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
 
 
     private List<CertificatePhotoPojo> certificatePhotoPojoList;
     private RecyclerView mCertiPicRecycle;
     private Certificate_Profile_Adapter mCertiPhotoAdapter;
     private ImageButton mBckBtnTrainerProfile;
+    private TextView mProfileRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,12 +118,11 @@ public class TrainerProfileActivity extends AppCompatActivity {
         try {
             mProfileAboutTrainer.setText(aboutTrainer);
             mProfileName.setText(trainerName);
-            // mProfleRating.setText(rating);
+            mProfileRating.setText(rating);
             mExperince.setText(experince);
             mGender.setText(gender);
             mToolbarUserName.setText(trainerName);
             mBtnBook.setText("HIRE NOW " + price + " only/-");
-            //     Picasso.get().load(picurl).into(mProfileImage);
             Picasso.get().load(picurl).into(mToolbarImageProfile);
 
 
@@ -176,6 +171,7 @@ public class TrainerProfileActivity extends AppCompatActivity {
         mProfilePicRecycle = findViewById(R.id.recycle_trainer_Photo);
         mCertiPicRecycle = findViewById(R.id.recycle_certi);
         mBckBtnTrainerProfile = findViewById(R.id.bck_btn_trainerProfile);
+        mProfileRating = findViewById(R.id.profile_rating);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.gtrainer.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gtrainer.Api.UrlLink;
 import com.example.gtrainer.R;
 import com.example.gtrainer.model.CertificatePhotoPojo;
+import com.example.gtrainer.ui.image.Full_Image_View_Activity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -67,7 +69,14 @@ public class Certificate_Profile_Adapter extends RecyclerView.Adapter<Certificat
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "oooooooo", Toast.LENGTH_SHORT).show();
+                   
+
+                    CertificatePhotoPojo photodata = data.get(getAdapterPosition());
+
+                    String picUrl = url+ photodata.getPic();
+
+                    Intent intent = Full_Image_View_Activity.createIntent(context,picUrl);
+                    context.startActivity(intent);
                 }
             });
         }

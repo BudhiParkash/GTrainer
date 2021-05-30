@@ -23,9 +23,9 @@
                 android:layout_width="180dp"
                 android:layout_height="180dp"
                 android:layout_margin="4dp"
-                android:src="@drawable/profile"
-                app:civ_border_color="@color/viewline"
-                app:civ_border_width="2dp"
+                android:src="@drawable/ic_baseline_person_24"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="1dp"
                 />
 
             <TextView
@@ -33,26 +33,20 @@
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
                 android:layout_margin="6dp"
+                android:fontFamily="@font/sansita_regular"
                 android:id="@+id/accountUserName"
                 android:textColor="@color/textcolor"
-                android:text="Shivam Sharma"/>
+                android:text="Shivam"/>
 
             <TextView
                 android:id="@+id/accountNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
+                android:fontFamily="@font/sansita_regular"
                 android:textColor="@color/textcolor"
                 android:text="870 XXX XXXX"/>
 
-            <TextView
-                android:id="@+id/userview_Account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_margin="4dp"
-                android:textColor="@color/colorPrimary"
-                android:text="View Account"/>
 
         </LinearLayout>
 

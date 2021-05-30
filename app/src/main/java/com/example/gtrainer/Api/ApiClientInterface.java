@@ -55,6 +55,11 @@ public class ApiClientInterface {
         @PATCH("/v1/app/users/me/update")
         Call<User>   postUserData(@Header("Authorization") String header , @Body User userData);
 
+
+        @GET("/users/me")
+        Call<User>  getUser(@Header("Authorization") String header);
+
+
         @PATCH("/v1/app/user/trainer")
         Call<User>  applyfortrainer(@Header("Authorization") String header , @Body User userData);
 

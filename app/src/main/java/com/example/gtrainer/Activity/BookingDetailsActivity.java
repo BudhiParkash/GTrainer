@@ -354,7 +354,7 @@ public class BookingDetailsActivity extends AppCompatActivity implements Payment
              * Merchant Name
              * eg: ACME Corp || HasGeek etc.
              */
-            options.put("name", "Charak");
+            options.put("name", "Gym Trainer");
 
             /**
              * Description can be anything

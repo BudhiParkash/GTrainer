@@ -1,10 +1,12 @@
 package com.example.gtrainer.OnBoardingScreen;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -20,15 +22,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.arch.core.executor.TaskExecutor;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
-import com.example.gtrainer.Api.ApiClientInterface;
+
 import com.example.gtrainer.R;
-import com.example.gtrainer.model.User;
-import com.example.gtrainer.model.UserPojo;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.safetynet.SafetyNet;
-import com.google.android.gms.safetynet.SafetyNetApi;
-import com.google.android.gms.safetynet.SafetyNetClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -77,6 +75,7 @@ public class OtpActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
         initView();
+        getPermission();
         mEtxtOtp.requestFocus();
     /*    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(mEtxtOtp, InputMethodManager.HIDE_IMPLICIT_ONLY);*/
@@ -100,6 +99,9 @@ public class OtpActivity extends AppCompatActivity  {
             }
         });
 
+//        //otp Recive from broadcast
+//        new OtpReciver().setOtpEditText(mEtxtOtp);
+
         mEtxtOtp.setOtpListener(new OTPListener() {
             @Override
             public void onInteractionListener() {
@@ -122,7 +124,11 @@ public class OtpActivity extends AppCompatActivity  {
 
 
 
-
+    private void getPermission() {
+        if(ContextCompat.checkSelfPermission(OtpActivity.this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(OtpActivity.this , new  String[]{Manifest.permission.RECEIVE_SMS},100);
+        }
+    }
     private void sendVerificationCode(String userNumer) {
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(myAuth)

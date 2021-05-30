@@ -2,6 +2,7 @@ package com.example.gtrainer;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,10 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.example.gtrainer.Activity.All_List_Trainer;
+import com.example.gtrainer.Activity.SearchActivity;
 import com.example.gtrainer.Adapter.AddvertismentAdapter;
 import com.example.gtrainer.Adapter.AllTrainerList_Adpter;
 import com.example.gtrainer.Adapter.Top_Trainer_Adapter;
 import com.example.gtrainer.Api.ApiClientInterface;
+import com.example.gtrainer.Api.UrlLink;
 import com.example.gtrainer.model.Ads_Pojo;
 import com.example.gtrainer.model.TrainerListPojo;
 import com.example.gtrainer.model.User;
@@ -38,6 +41,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
@@ -46,13 +50,15 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator;
 
 public class MainActivity extends AppCompatActivity {
-
+    static UrlLink urls = new UrlLink();
+    private final static String url = urls.url;
     private RecyclerView mRecycleAdds;
     private ScrollingPagerIndicator mIndicator;
 
@@ -94,8 +100,14 @@ public class MainActivity extends AppCompatActivity {
     private List<User> newtrainerList = new ArrayList<User>();
     private AllTrainerList_Adpter mAllTrainer_Adapter;
 
-    private String userName;
+    private String userName, phnNumber;
     private TextView mHomeUserName;
+    private CircleImageView mHomeImageProfile;
+    private CircleImageView mAccountImage;
+    private TextView mAccountUserName;
+    private TextView mAccountNumber;
+    private TextView mNewTrainerViewAll;
+    private TextView mBtnsearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,14 +118,16 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             tokken = prefs.getString("tokken", "no tokkens");
-            userName =prefs.getString("name" , "Your Name");
-        }
-        catch (Exception e){
+            userName = prefs.getString("name", "Your Name");
+            phnNumber = prefs.getString("num", "98100xxxxx");
+        } catch (Exception e) {
 
         }
 
         mAddProgress.setVisibility(View.VISIBLE);
         mHomeUserName.setText(userName);
+        mAccountUserName.setText(userName);
+        mAccountNumber.setText(phnNumber);
 
         mRecycleAdds.setHasFixedSize(true);
         mRecycleAdds.setLayoutManager(linearLayoutManager);
@@ -123,9 +137,25 @@ public class MainActivity extends AppCompatActivity {
         mNewTrainerRecycle.setHasFixedSize(true);
         mNewTrainerRecycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
+        boolean isDarkThemeOn = (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+
+
+        if (!isDarkThemeOn) {
+            mDrawerLinerLayout.setBackgroundColor(getResources().getColor(R.color.white));
+        }
         Call_Ads_Data();
         getTopTrainers();
         getNewTrainers();
+        getUser();
+
+
+        mBtnsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mViewAllTrainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,6 +221,48 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLinerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+            }
+        });
+
+        mNewTrainerViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, All_List_Trainer.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void getUser() {
+        Call<User> call = ApiClientInterface.getTrainerApiService().getUser(tokken);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 200) {
+
+                    String picUrl="";
+
+                    User userData = response.body();
+
+                    for (int i = 0; i < userData.getTrainerPic().size() ; i++){
+                     picUrl = userData.getTrainerPic().get(i).getPic();
+                    }
+
+
+                    try {
+                        Picasso.get().load(url + picUrl).into(mAccountImage);
+                        Picasso.get().load(url+picUrl).into(mHomeImageProfile);
+                    }
+                    catch (Exception e){
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
 
             }
         });
@@ -335,5 +407,11 @@ public class MainActivity extends AppCompatActivity {
         mPrivacyLayout = findViewById(R.id.privacy_layout);
         mTermConditionL = findViewById(R.id.term_conditionL);
         mHomeUserName = findViewById(R.id.home_userName);
+        mHomeImageProfile = findViewById(R.id.home_Image_profile);
+        mAccountImage = findViewById(R.id.accountImage);
+        mAccountUserName = findViewById(R.id.accountUserName);
+        mAccountNumber = findViewById(R.id.accountNumber);
+        mNewTrainerViewAll = findViewById(R.id.newTrainer_ViewAll);
+        mBtnsearch = findViewById(R.id.btnsearch);
     }
 }

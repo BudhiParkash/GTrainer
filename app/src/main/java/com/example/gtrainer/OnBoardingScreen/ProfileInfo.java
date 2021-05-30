@@ -57,13 +57,13 @@ public class ProfileInfo extends AppCompatActivity {
         editor.apply();
         try {
             onlyNumber = getIntent().getStringExtra("num");
-
         }
         catch (Exception e){
 
         }
         createUser();
 
+        mProfileProgreeBar.setVisibility(View.VISIBLE);
         mTxtphonenumber.setText(onlyNumber);
 
 
@@ -99,22 +99,24 @@ public class ProfileInfo extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if((response.code() == 200)){
+                    mProfileProgreeBar.setVisibility(View.GONE);
                     editor.putString("name" , name);
+                    editor.putString("num" , onlyNumber);
                     editor.apply();
                     Intent intent = new Intent(ProfileInfo.this , MainActivity.class);
                     startActivity(intent);
                     finish();
-
-                    Toast.makeText(ProfileInfo.this, "Sucess", Toast.LENGTH_SHORT).show();
                 }
 
                 else {
+                    mProfileProgreeBar.setVisibility(View.GONE);
                     Toast.makeText(ProfileInfo.this, "try after sometime", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                mProfileProgreeBar.setVisibility(View.GONE);
                 Toast.makeText(ProfileInfo.this, "try after sometime", Toast.LENGTH_SHORT).show();
             }
         });
@@ -135,6 +137,7 @@ public class ProfileInfo extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserPojo> call, Response<UserPojo> response) {
                 if(response.code() == 201 || response.code() == 200){
+                    mProfileProgreeBar.setVisibility(View.GONE);
                     UserPojo userData = response.body();
 
                     assert userData != null;
@@ -147,15 +150,17 @@ public class ProfileInfo extends AppCompatActivity {
                     Toast.makeText(ProfileInfo.this, "Success", Toast.LENGTH_SHORT).show();
                 }
                 else if(response.code() == 400) {
-
+                    mProfileProgreeBar.setVisibility(View.GONE);
                     Toast.makeText(ProfileInfo.this, "Try after sometime", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    mProfileProgreeBar.setVisibility(View.GONE);
                     Toast.makeText(ProfileInfo.this, "Try after sometime or contact to company" + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<UserPojo> call, Throwable t) {
+                mProfileProgreeBar.setVisibility(View.GONE);
                 Toast.makeText(ProfileInfo.this, "Something went wrong. Please contact to company" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

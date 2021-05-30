@@ -44,7 +44,6 @@
 
 
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bookingRecycle"
             android:layout_width="match_parent"
@@ -54,6 +53,23 @@
     </LinearLayout>
 
 
+    <TextView
+        android:id="@+id/txtNoBooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Booking yet!"
+        android:textColor="@color/textcolor"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/squadaone_regular"
+        android:textSize="28sp"
+        android:visibility="gone"
+        />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/bookingProgress"/>
 
 </RelativeLayout>

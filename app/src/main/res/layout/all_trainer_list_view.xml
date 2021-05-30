@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:drawableTop="@drawable/ic_star"
-            android:text="4.5/5.0"
+            android:text="5.0"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"/>
 
@@ -71,9 +71,9 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/courgette_regular"
                     android:text="A good trainer with lot of expirence."
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:maxLines="2"
-                    android:textColor="@color/textcolor"/>
+                    android:textColor="@color/lighttextcolor"/>
 
                 <TextView
                     android:id="@+id/trainer_price"

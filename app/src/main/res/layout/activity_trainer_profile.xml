@@ -36,7 +36,7 @@
                 android:layout_height="60dp"
                 app:civ_border_color="@color/colorPrimary"
                 android:scaleType="centerCrop"
-                android:src="@drawable/johncina"
+                android:src="@drawable/ic_baseline_person_24"
                 android:padding="5dp"/>
 
             <TextView
@@ -62,17 +62,7 @@
          android:layout_width="match_parent"
          android:layout_height="match_parent">
 
-      <!--   <TextView
-             android:id="@+id/profle_rating"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:drawableTop="@drawable/ic_star"
-             android:layout_alignParentEnd="true"
-             android:layout_margin="20dp"
-             android:textColor="@color/colorPrimary"
-             android:text="5"
-             android:textAlignment="center"
-             android:textSize="20sp"/>-->
+
 
 
         <LinearLayout
@@ -129,6 +119,25 @@
        android:elevation="0dp"
        android:backgroundTint="@android:color/transparent">
 
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <TextView
+               android:id="@+id/profile_rating"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:drawableStart="@drawable/ic_star"
+               android:layout_alignParentEnd="true"
+               android:drawablePadding="5dp"
+               android:layout_margin="12dp"
+               android:textColor="@color/textcolor"
+               android:text="5.0"
+               android:textAlignment="center"
+             />
+
+
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
@@ -183,23 +192,8 @@ Participate in the Unacademy Combat, a weekly "/>
 
        </LinearLayout>
 
-
+       </RelativeLayout>
    </androidx.cardview.widget.CardView>
-
-
-
-            <Button
-                android:id="@+id/btnBook"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
-                android:textColor="@color/white"
-                android:background="@drawable/roundbutton"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Hire Now only 999 Rs"/>
 
 
             <LinearLayout
@@ -231,6 +225,20 @@ Participate in the Unacademy Combat, a weekly "/>
 
 
             </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnBook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:textColor="@color/white"
+                android:background="@drawable/roundbutton"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Hire Now only 999 Rs"/>
 
 
         </LinearLayout>

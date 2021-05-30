@@ -28,7 +28,7 @@
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_gravity="center"
-        app:SpinKit_Color="@color/colorPrimary"
+        app:SpinKit_Color="@color/AgreeColor"
         android:layout_centerInParent="true"
         />
 

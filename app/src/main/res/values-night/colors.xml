@@ -15,8 +15,8 @@
     <color name="colorScreen2">#32B93B</color>
     <color name="colorScreen3">#CC274f</color>
     <color name="textcolor">#ffffff</color>
-    <color name="lighttextcolor">#DADADA</color>
-    <color name="AgreeColor">#62B0FF</color>
+    <color name="lighttextcolor">#656565</color>
+    <color name="AgreeColor">#1093F5</color>
 
     <color name="viewline">#D8D8D8</color>
 

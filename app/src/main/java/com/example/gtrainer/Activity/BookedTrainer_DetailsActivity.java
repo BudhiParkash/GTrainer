@@ -2,6 +2,7 @@ package com.example.gtrainer.Activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -56,6 +57,7 @@ public class BookedTrainer_DetailsActivity extends AppCompatActivity {
         tokken = preferences.getString("tokken", "");
 
 
+
         try {
             trainerName = getIntent().getStringExtra("trainerName");
             trainerGender = getIntent().getStringExtra("trainerGender");
@@ -86,6 +88,12 @@ public class BookedTrainer_DetailsActivity extends AppCompatActivity {
 
 
 
+        mBckBtnBookeddetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
     }
@@ -104,5 +112,10 @@ public class BookedTrainer_DetailsActivity extends AppCompatActivity {
         mBckBtnBookeddetails = findViewById(R.id.bck_btn_bookeddetails);
         mToolbarImageBookedtrainer = findViewById(R.id.toolbar_Image_bookedtrainer);
         mToolbarBookedtrainerName = findViewById(R.id.toolbar_bookedtrainer_Name);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
