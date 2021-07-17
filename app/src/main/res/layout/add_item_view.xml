@@ -6,11 +6,12 @@
     
     
     <androidx.cardview.widget.CardView
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="20dp"
-        android:elevation="10dp"
-        app:cardCornerRadius="30dp"
+        android:elevation="30dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="12dp"
         android:layout_width="match_parent"
         android:layout_height="200dp">
         
@@ -24,7 +25,11 @@
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/cadio"/>
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/trasparent_bg_bottom"
+                android:fitsSystemWindows="true" />
 
             <TextView
                 android:id="@+id/addname"

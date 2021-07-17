@@ -1,15 +1,16 @@
 {
   "project_info": {
     "project_number": "508442463973",
+    "firebase_url": "https://gtrainer-default-rtdb.firebaseio.com",
     "project_id": "gtrainer",
     "storage_bucket": "gtrainer.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:508442463973:android:c778ea4bb46ddc07470e0c",
+        "mobilesdk_app_id": "1:508442463973:android:68e472643d24a031470e0c",
         "android_client_info": {
-          "package_name": "com.example.gtrainer"
+          "package_name": "com.skywalkers.gtrainer"
         }
       },
       "oauth_client": [
@@ -20,7 +21,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB3i44RJRozDew2EzSxhhO_sMapCdsAVhs"
+          "current_key": "AIzaSyDr0OJQ7XXckwA6DclA12ZTCqaJMsdgxbg"
         }
       ],
       "services": {

@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.gtrainer">
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
+    package="com.skywalkers.gtrainer">
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
@@ -21,28 +12,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GTrainer"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".Activity.SearchActivity" />
+        <activity android:name=".ui.Activity.TrainerDetailActivity"></activity>
+        <activity android:name=".ui.Activity.SearchActivity" />
         <activity android:name=".ui.image.Full_Image_View_Activity" />
-        <activity android:name=".Activity.BookingDetailsActivity" />
-        <activity android:name=".Activity.BookedTrainer_DetailsActivity" />
-        <activity android:name=".ImageUpload" />
+        <activity android:name=".ui.Activity.BookingDetailsActivity" />
+        <activity android:name=".ui.Activity.BookedTrainer_DetailsActivity" />
+        <activity android:name=".attachmentUpload.ImageUpload" />
         <activity android:name=".ui.SideMenuActivity.BookingActivity" />
         <activity android:name=".ui.SideMenuActivity.TermsAndConditionActivity" />
         <activity android:name=".ui.SideMenuActivity.PrivacyAndPolicyActivity" />
         <activity android:name=".ui.SideMenuActivity.HelpActivity" />
-        <activity android:name=".Activity.Apply_For_Trainer_2" />
+        <activity android:name=".ui.Activity.Apply_For_Trainer_2" />
         <activity android:name=".ui.SideMenuActivity.Apply_For_Trainer" />
-        <activity android:name=".Activity.TrainerProfileActivity" />
-        <activity android:name=".Activity.All_List_Trainer" />
-        <activity android:name=".OnBoardingScreen.ProfileInfo" />
+        <activity android:name=".ui.Activity.TrainerProfileActivity" />
+        <activity android:name=".ui.Activity.All_List_Trainer" />
+        <activity android:name=".ui.OnBoardingScreen.ProfileInfo" />
         <activity
-            android:name=".OnBoardingScreen.OtpActivity"
+            android:name=".ui.OnBoardingScreen.OtpActivity"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name=".OnBoardingScreen.Login"
+            android:name=".ui.OnBoardingScreen.Login"
             android:windowSoftInputMode="stateVisible" />
-        <activity android:name=".OnBoardingScreen.SplashScreen">
+        <activity android:name=".ui.OnBoardingScreen.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,5 +42,15 @@
         </activity>
         <activity android:name=".MainActivity" />
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
 </manifest>

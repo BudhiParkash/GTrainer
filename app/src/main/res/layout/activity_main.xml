@@ -39,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
+                android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:layout_centerInParent="true"
                 android:textSize="18sp"/>
@@ -83,7 +84,7 @@
                 android:layout_height="60dp"
                 app:civ_border_width="1dp"
                 app:civ_border_color="@color/colorPrimary"
-                android:src="@drawable/ic_baseline_person_24"
+                android:src="@drawable/boy"
                 android:scaleType="centerCrop"
                 android:padding="5dp"/>
 
@@ -111,7 +112,7 @@
                     android:text=""
                     android:fontFamily="@font/squadaone_regular"
                     android:textColor="@color/textcolor"
-                    android:textSize="24sp"/>
+                    android:textSize="26sp"/>
             </LinearLayout>
 
 
@@ -164,7 +165,7 @@
                 android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Popular"
+                android:text="Popular Plans"
                 android:textSize="24sp"
                 android:fontFamily="@font/squadaone_regular"
                 android:textColor="@color/textcolor"
@@ -172,7 +173,7 @@
                 />
 
 
-            <com.google.android.material.card.MaterialCardView
+           <!-- <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btnViewAllTrainer"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
@@ -192,20 +193,27 @@
                     android:gravity="center"
                     android:textColor="@color/white"/>
 
-            </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>-->
 
 
 
         </RelativeLayout>
 
-           <com.yarolegovich.discretescrollview.DiscreteScrollView
+          <!--  <com.yarolegovich.discretescrollview.DiscreteScrollView
                android:id="@+id/toptrainerRecycle"
                android:layout_marginTop="20dp"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                app:dsv_orientation="horizontal"
 
-               />
+               />-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="310dp"
+                android:id="@+id/popularplans"
+                android:layout_marginTop="20dp"/>
+
 
             <View
                 android:layout_marginTop="8dp"

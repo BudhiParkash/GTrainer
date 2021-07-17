@@ -59,7 +59,7 @@
                     android:id="@+id/trainer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="Sahil Verma"
                     android:textSize="20sp"
                     android:textColor="@color/textcolor"/>
 
@@ -69,8 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:fontFamily="@font/courgette_regular"
-                    android:text="A good trainer with lot of expirence."
+                    android:text="A good trainer with lot of expirence.asdas asdas A good trainer with lot"
                     android:textSize="14sp"
                     android:maxLines="2"
                     android:textColor="@color/lighttextcolor"/>
@@ -80,7 +79,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rs. 999/M"
+                    android:text="Rs. 999"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="@color/colorPrimary"/>
